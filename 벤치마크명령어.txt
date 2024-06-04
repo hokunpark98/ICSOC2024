@@ -1,3 +1,0 @@
-wrk2 -t 2 -c 2 -d 30 -L -s /home/dnc/master/paper2024/DSbench/DeathStarBench/hotelReservation/wrk2/scripts/hotel-reservation/mixed-workload_type_1.lua http://10.97.35.95:5000 -R 2 > a.txt
-
-wrk -t10 -c10 -d30s  --latency http://10.106.62.125:9080/productpage > b.txt

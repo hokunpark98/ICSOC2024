@@ -1,9 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from collections import defaultdict
-import copy
-import math
-
 
 class DAG:
     def __init__(self):
@@ -98,67 +95,15 @@ class DAG:
         return edge_evaluation
 
     def check_isolated_nodes(self, graph, edges_to_remove):
-        for edge in edges_to_remove:
-            source, destination = edge
-            if source in graph.nodes and destination in graph.nodes:
-                graph.remove_edge(source, destination)
+            for edge in edges_to_remove:
+                source, destination = edge
+                if source in graph.nodes and destination in graph.nodes:
+                    graph.remove_edge(source, destination)
+
+
+            
 
     def create_dag_without_nodes(self, nodes_to_remove, edges):
         remaining_nodes = [node for node in self.graph.nodes if node not in nodes_to_remove]
         remaining_edges = [edge for edge in edges if edge[0] not in nodes_to_remove and edge[1] not in nodes_to_remove]
         self.create_dag(remaining_nodes, remaining_edges)
-    
-    def print_node_connections(self):
-        for node in self.graph.nodes:
-            upstream = list(self.graph.predecessors(node))
-            downstream = list(self.graph.successors(node))
-            print(f"Node: {node}, Upstream: {upstream}, Downstream: {downstream}")
-
-    def get_edges_above_threshold(self, paths_above_threshold):
-        edges_to_remove = set()
-        for path, _ in paths_above_threshold:
-            for i in range(len(path) - 1):
-                edges_to_remove.add((path[i], path[i + 1]))
-        return list(edges_to_remove)
-
-
-
-    def check_paths_removed(self, edges_to_remove, paths_above_threshold):
-        '''
-        경로 후보를 제거하고, 모든 경로가 제거되었는지 확인하고 저부하 레플리카 개수 확인함
-        '''
-
-        test_dag = copy.deepcopy(self)
-        test_dag.graph.remove_edges_from(edges_to_remove)
-        
-        # paths_above_threshold가 모두 제거되었는지 확인
-        paths_remaining = False
-        for path, _ in paths_above_threshold:
-            path_removed = any(not test_dag.graph.has_edge(path[i], path[i + 1]) for i in range(len(path) - 1))
-            if not path_removed:
-                paths_remaining = True
-                break
-
-        if paths_remaining:
-            return False, None, []  # paths_above_threshold가 모두 제거되지 않음
-        
-        # 저부하 레플리카 계산
-        underload_replicas = set()
-        target_nodes = {destination for _, destination in edges_to_remove}
-        
-        for destination in target_nodes:
-            destination_service = destination.split('-')[0]
-            destination_replicas = len([node for node in self.graph.nodes if node.startswith(destination_service)])
-            
-            if destination_replicas > 0:
-                source_service = [source.split('-')[0] for source, dest in edges_to_remove if dest == destination][0]
-                source_replicas = len([node for node in self.graph.nodes if node.startswith(source_service)])
-                imbalance_threshold = math.ceil(source_replicas / destination_replicas)
-                
-                upstream_count = len(list(test_dag.graph.predecessors(destination)))
-                #print(f'destination {destination} upstream_count {upstream_count}')  # 로그 추가
-                if upstream_count < imbalance_threshold:
-                    underload_replicas.add(destination)
-        
-        return True, len(underload_replicas), list(underload_replicas)
-

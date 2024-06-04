@@ -5,7 +5,7 @@ class IstioMetrics:
         self.prom = PrometheusConnect(url=prometheus_url, disable_ssl=True)
 
     def get_request_durations(self, namespace):
-        query = f'rate(istio_request_duration_milliseconds_sum{{kubernetes_namespace="paper2"}}[1d]) / rate(istio_request_duration_milliseconds_count{{kubernetes_namespace="paper2"}}[1d])'
+        query = f'rate(istio_request_duration_milliseconds_sum{{kubernetes_namespace="paper2"}}[5m]) / rate(istio_request_duration_milliseconds_count{{kubernetes_namespace="paper2"}}[5m])'
         result = self.prom.custom_query(query)
         return self.parse_istio_metrics(result)
 

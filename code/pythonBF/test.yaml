@@ -1,0 +1,41 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: service-a1-to-service-b2-vs
+  namespace: paper2
+spec:
+  hosts:
+  - service-b
+  http:
+  - match:
+    - sourceLabels:
+        app: service-a
+        version: service-a1
+    route:
+    - destination:
+        host: service-b
+        subset: service-b2
+      weight: 0
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: service-b-dr
+  namespace: paper2
+spec:
+  host: service-b
+  subsets:
+  - name: service-b1
+    labels:
+      version: service-b1
+  - name: service-b2
+    labels:
+      version: service-b2
+  - name: service-b3
+    labels:
+      version: service-b3
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
+
