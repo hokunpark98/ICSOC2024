@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-d
+  namespace: paper2
+  labels:
+    app: service-d
+    
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: service-d
+      
+  template:
+    metadata:
+      labels:
+        app: service-d
+        
+    spec:
+      containers:
+      - name: service-d
+        image: hokunpark/paper2:serviceD
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "1000Mi"
+        ports:
+        - containerPort: 11003
+        command: ["uvicorn"]
+        args: ["main:app", "--host", "0.0.0.0", "--port", "11003"]
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - service-d
+            topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node
+                operator: NotIn
+                values:
+                - master
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-d
+  namespace: paper2
+spec:
+  selector:
+    app: service-d
+  ports:
+  - name: http
+    port: 11003
+    protocol: TCP
+    targetPort: 11003
+  type: ClusterIP

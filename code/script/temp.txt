@@ -1,0 +1,13 @@
+
+
+sum(istio_request_duration_milliseconds_sum{
+  kubernetes_namespace="paper2",
+  source_workload="service-b-deployment",
+  source_version="service-b-worker2"
+}) 
+* on(source_app, source_version) group_left(destination_app, destination_version)
+sum(istio_request_duration_milliseconds_sum{
+  kubernetes_namespace="paper2",
+  source_workload="service-c-deployment",
+  source_version="service-c-worker2"
+}) 

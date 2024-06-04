@@ -1,0 +1,177 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a1
+  namespace: paper2
+  labels:
+    app: service-a
+    version: service-a1
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+      version: service-a1
+      
+  template:
+    metadata:
+      labels:
+        app: service-a
+        version: service-a1
+        
+    spec:
+      containers:
+      - name: service-a
+        image: hokunpark/paper2:serviceA
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "1000Mi"
+        ports:
+        - containerPort: 11000
+        command: ["uvicorn"]
+        args: ["main:app", "--host", "0.0.0.0", "--port", "11000"]
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - service-a
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node
+                operator: NotIn
+                values:
+                - master
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a2
+  namespace: paper2
+  labels:
+    app: service-a
+    version: service-a2
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+      version: service-a2
+      
+  template:
+    metadata:
+      labels:
+        app: service-a
+        version: service-a2
+        
+    spec:
+      containers:
+      - name: service-a
+        image: hokunpark/paper2:serviceA
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "1000Mi"
+        ports:
+        - containerPort: 11000
+        command: ["uvicorn"]
+        args: ["main:app", "--host", "0.0.0.0", "--port", "11000"]
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - service-a
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node
+                operator: NotIn
+                values:
+                - master
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a3
+  namespace: paper2
+  labels:
+    app: service-a
+    version: service-a3
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+      version: service-a3
+
+  template:
+    metadata:
+      labels:
+        app: service-a
+        version: service-a3
+
+    spec:
+      containers:
+      - name: service-a
+        image: hokunpark/paper2:serviceA
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "1000Mi"
+        ports:
+        - containerPort: 11000
+        command: ["uvicorn"]
+        args: ["main:app", "--host", "0.0.0.0", "--port", "11000"]
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - service-a
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node
+                operator: NotIn
+                values:
+                - master
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a
+  namespace: paper2
+spec:
+  selector:
+    app: service-a
+  ports:
+  - name: http
+    port: 11000
+    protocol: TCP
+    targetPort: 11000
+  type: ClusterIP

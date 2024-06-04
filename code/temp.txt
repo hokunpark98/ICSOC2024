@@ -1,0 +1,26 @@
+dnc@master:~$ python3 /home/dnc/master/paper2024/customBench/code/virtual_user_bench.py
+1 users: 172 ms
+
+5 users: 307 ms
+
+10 users: 426 ms
+
+20 users: 710 ms
+
+50 users: 1413 ms
+
+dnc@master:~$ python3 /home/dnc/master/paper2024/customBench/code/virtual_user_bench.py
+1 users: 255 ms
+
+5 users: 282 ms
+
+10 users: 407 ms
+
+20 users: 587 ms
+
+50 users: 1221 ms
+
+
+
+
+

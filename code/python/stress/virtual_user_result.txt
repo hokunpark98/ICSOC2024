@@ -1,0 +1,5 @@
+1 users: 350 ms
+5 users: 423 ms
+10 users: 464 ms
+20 users: 702 ms
+50 users: 1588 ms

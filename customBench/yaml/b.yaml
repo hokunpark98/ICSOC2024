@@ -1,0 +1,175 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-b1
+  namespace: paper2
+  labels:
+    app: service-b
+    version: service-b1
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-b
+      version: service-b1
+      
+  template:
+    metadata:
+      labels:
+        app: service-b
+        version: service-b1
+    spec:
+      containers:
+      - name: service-b
+        image: hokunpark/paper2:serviceB
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "1000Mi"
+        ports:
+        - containerPort: 11001
+        command: ["uvicorn"]
+        args: ["main:app", "--host", "0.0.0.0", "--port", "11001"]
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - service-b
+            topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node
+                operator: NotIn
+                values:
+                - master
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-b2
+  namespace: paper2
+  labels:
+    app: service-b
+    version: service-b2
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-b
+      version: service-b2
+      
+  template:
+    metadata:
+      labels:
+        app: service-b
+        version: service-b2
+        
+    spec:
+      containers:
+      - name: service-b
+        image: hokunpark/paper2:serviceB
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "1000Mi"
+        ports:
+        - containerPort: 11001
+        command: ["uvicorn"]
+        args: ["main:app", "--host", "0.0.0.0", "--port", "11001"]
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - service-b
+            topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node
+                operator: NotIn
+                values:
+                - master
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-b3
+  namespace: paper2
+  labels:
+    app: service-b
+    version: service-b3
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-b
+      version: service-b3
+      
+  template:
+    metadata:
+      labels:
+        app: service-b
+        version: service-b3
+        
+    spec:
+      containers:
+      - name: service-b
+        image: hokunpark/paper2:serviceB
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "1000Mi"
+        ports:
+        - containerPort: 11001
+        command: ["uvicorn"]
+        args: ["main:app", "--host", "0.0.0.0", "--port", "11001"]
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - service-b
+            topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node
+                operator: NotIn
+                values:
+                - master
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b
+  namespace: paper2
+spec:
+  selector:
+    app: service-b
+  ports:
+  - name: http
+    port: 11001
+    protocol: TCP
+    targetPort: 11001
+  type: ClusterIP
