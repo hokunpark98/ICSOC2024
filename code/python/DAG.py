@@ -125,9 +125,8 @@ class DAG:
 
     def check_paths_removed(self, edges_to_remove, paths_above_threshold):
         '''
-        경로 후보를 제거하고, 모든 경로가 제거되었는지 확인하고 저부하 레플리카 개수 확인함
+        경로 후보를 제거하고, 모든 경로가 제거되었는지 확인하는 기능만 수행
         '''
-
         test_dag = copy.deepcopy(self)
         test_dag.graph.remove_edges_from(edges_to_remove)
         
@@ -139,26 +138,4 @@ class DAG:
                 paths_remaining = True
                 break
 
-        if paths_remaining:
-            return False, None, []  # paths_above_threshold가 모두 제거되지 않음
-        
-        # 저부하 레플리카 계산
-        underload_replicas = set()
-        target_nodes = {destination for _, destination in edges_to_remove}
-        
-        for destination in target_nodes:
-            destination_service = destination.split('-')[0]
-            destination_replicas = len([node for node in self.graph.nodes if node.startswith(destination_service)])
-            
-            if destination_replicas > 0:
-                source_service = [source.split('-')[0] for source, dest in edges_to_remove if dest == destination][0]
-                source_replicas = len([node for node in self.graph.nodes if node.startswith(source_service)])
-                imbalance_threshold = math.ceil(source_replicas / destination_replicas)
-                
-                upstream_count = len(list(test_dag.graph.predecessors(destination)))
-                #print(f'destination {destination} upstream_count {upstream_count}')  # 로그 추가
-                if upstream_count < imbalance_threshold:
-                    underload_replicas.add(destination)
-        
-        return True, len(underload_replicas), list(underload_replicas)
-
+        return not paths_remaining

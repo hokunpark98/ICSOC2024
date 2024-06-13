@@ -282,7 +282,7 @@ def main():
     virtual_service_yamls = create_virtual_service_yaml(service_routes)
     for vs_yaml in virtual_service_yamls.values():
         print(vs_yaml)
-        #apply_yaml(vs_yaml)
+        apply_yaml(vs_yaml)
 
     # Apply DestinationRule for all services involved
     service_versions = get_service_versions(namespace)

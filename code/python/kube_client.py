@@ -1,4 +1,3 @@
-import copy
 import yaml
 from kubernetes import client, config
 from kubernetes.client.rest import ApiException
@@ -52,7 +51,7 @@ class KubernetesClient:
             )
         except ApiException as e:
             if e.status == 409:
-                # If the object already exists, fetch the existing object
+               
                 existing_object = self.custom_objects_api.get_namespaced_custom_object(
                     group=group,
                     version=version,
@@ -60,9 +59,9 @@ class KubernetesClient:
                     plural=plural,
                     name=name
                 )
-                # Set the resourceVersion from the existing object
+                
                 yaml_object["metadata"]["resourceVersion"] = existing_object["metadata"]["resourceVersion"]
-                # Replace the existing object with the new one
+                
                 self.custom_objects_api.replace_namespaced_custom_object(
                     group=group,
                     version=version,
@@ -125,7 +124,7 @@ class KubernetesClient:
         subset: {version}
       weight: 0"""
 
-            if routes_yaml:  # Only add if there are routes
+            if routes_yaml:  #
                 yaml_content = f"""
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -189,6 +188,9 @@ spec:
         for dest in remaining_destinations:
             destination_weights[dest] = equal_weight
 
+    '''
+    모든 경로가 0인 경우 에러가 발생
+    '''
     def apply_virtual_service(self, service_routes, downstream_versions):
         virtual_service_yamls = self.create_virtual_service_yaml(service_routes, downstream_versions)
         for vs_yaml in virtual_service_yamls.values():
@@ -200,10 +202,3 @@ spec:
             destination_rule_yaml = self.create_destination_rule_yaml(service, versions)
             print(destination_rule_yaml)
             #self.apply_yaml(destination_rule_yaml)
-
-
-
-
-
-
-
