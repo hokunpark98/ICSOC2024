@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: service-b-to-service-c-vs
+  namespace: paper2
+spec:
+  hosts:
+  - service-c
+  http:
+  - match:
+    - sourceLabels:
+        app: service-b
+        version: service-b3
+    route:
+    - destination:
+        host: service-c
+        subset: service-c1
+      weight: 34
+    - destination:
+        host: service-c
+        subset: service-c2
+      weight: 33
+    - destination:
+        host: service-c
+        subset: service-c3
+      weight: 33
