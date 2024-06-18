@@ -1,0 +1,50 @@
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송
+1 users: Total requests sent: 1000, over threshold 153 times, 95th percentile 275 ms, 99th percentile 327 ms
+제안 기법 적용
+적용해서 전송
+1 users: Total requests sent: 1000, over threshold 83 times, 95th percentile 262 ms, 99th percentile 283 ms
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송
+1 users: Total requests sent: 1000, over threshold 182 times, 95th percentile 277 ms, 99th percentile 333 ms
+제안 기법 적용
+적용해서 전송
+1 users: Total requests sent: 1000, over threshold 73 times, 95th percentile 260 ms, 99th percentile 286 ms
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송
+1 users: Total requests sent: 1000, over threshold 175 times, 95th percentile 280 ms, 99th percentile 344 ms
+제안 기법 적용
+적용해서 전송
+1 users: Total requests sent: 1000, over threshold 2 times, 95th percentile 212 ms, 99th percentile 224 ms
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송
+1 users: Total requests sent: 1000, over threshold 193 times, 95th percentile 280 ms, 99th percentile 323 ms
+제안 기법 적용
+적용해서 전송
+1 users: Total requests sent: 1000, over threshold 2 times, 95th percentile 213 ms, 99th percentile 220 ms
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송
+1 users: Total requests sent: 1000, over threshold 206 times, 95th percentile 280 ms, 99th percentile 324 ms
+제안 기법 적용
+적용해서 전송
+1 users: Total requests sent: 1000, over threshold 58 times, 95th percentile 253 ms, 99th percentile 273 ms
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송
+1 users: Total requests sent: 1000, over threshold 173 times, 95th percentile 278 ms, 99th percentile 332 ms
+제안 기법 적용
+적용해서 전송
+1 users: Total requests sent: 1000, over threshold 74 times, 95th percentile 264 ms, 99th percentile 287 ms
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송
+1 users: Total requests sent: 1000, over threshold 191 times, 95th percentile 280 ms, 99th percentile 323 ms
+제안 기법 적용
+적용해서 전송
+1 users: Total requests sent: 1000, over threshold 69 times, 95th percentile 262 ms, 99th percentile 286 ms
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송
+1 users: Total requests sent: 1000, over threshold 191 times, 95th percentile 279 ms, 99th percentile 305 ms
+제안 기법 적용
+적용해서 전송
+1 users: Total requests sent: 1000, over threshold 87 times, 95th percentile 268 ms, 99th percentile 289 ms
+Waiting for 20 seconds to let the Kubernetes deployment stabilize...
+기본 전송

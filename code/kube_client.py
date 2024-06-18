@@ -10,7 +10,54 @@ class KubernetesClient:
         self.v1 = client.CoreV1Api()
         self.apps_v1 = client.AppsV1Api()
         self.custom_objects_api = client.CustomObjectsApi()
-        self.virtualservice_dir = "/home/dnc/master/paper2024/virtualservice"
+        self.virtualservice_dir = "/home/dnc/master/paper2024/trafficyaml"
+        self.trafficyaml_dir = "/home/dnc/master/paper2024/trafficyaml"
+
+    def get_upstream_services(self, service_name):
+        upstream_services = set()
+        try:
+            virtual_services = self.custom_objects_api.list_namespaced_custom_object(
+                group="networking.istio.io",
+                version="v1alpha3",
+                namespace=self.namespace,
+                plural="virtualservices"
+            )
+            for vs in virtual_services.get("items", []):
+                if "spec" in vs and "http" in vs["spec"]:
+                    for http in vs["spec"]["http"]:
+                        for route in http.get("route", []):
+                            destination_host = route.get("destination", {}).get("host")
+                            if destination_host == service_name:
+                                for match in http.get("match", []):
+                                    source_service = match.get("sourceLabels", {}).get("app")
+                                    if source_service:
+                                        upstream_services.add(source_service)
+        except ApiException as e:
+            print(f"Error getting upstream services: {e}")
+        return list(upstream_services)
+
+    def get_downstream_services(self, service_name):
+        downstream_services = set()
+        try:
+            virtual_services = self.custom_objects_api.list_namespaced_custom_object(
+                group="networking.istio.io",
+                version="v1alpha3",
+                namespace=self.namespace,
+                plural="virtualservices"
+            )
+            for vs in virtual_services.get("items", []):
+                if "spec" in vs and "http" in vs["spec"]:
+                    for http in vs["spec"]["http"]:
+                        for route in http.get("route", []):
+                            source_host = vs["spec"]["hosts"][0]
+                            destination_host = route.get("destination", {}).get("host")
+                            if source_host == service_name:
+                                downstream_services.add(destination_host)
+        except ApiException as e:
+            print(f"Error getting downstream services: {e}")
+        return list(downstream_services)
+
+
 
     def get_pods_for_service(self, service_name):
         pods = self.v1.list_namespaced_pod(self.namespace, label_selector=f'app={service_name}').items
@@ -27,6 +74,35 @@ class KubernetesClient:
     def get_node_for_pod(self, pod_name):
         pod = self.v1.read_namespaced_pod(pod_name, self.namespace)
         return pod.spec.node_name
+
+    def get_service_by_deployment(self, deployment_name):
+        try:
+            deployment = self.apps_v1.read_namespaced_deployment(name=deployment_name, namespace=self.namespace)
+            return deployment.metadata.labels.get('app')
+        except ApiException as e:
+            print(f"Error getting service by deployment: {e}")
+        return None
+
+
+    def get_service_by_version(self, version_name):
+        try:
+            deployments = self.apps_v1.list_namespaced_deployment(self.namespace)
+            for deployment in deployments.items:
+                labels = deployment.metadata.labels
+                if labels.get('version') == version_name:
+                    return labels.get('app')
+        except ApiException as e:
+            print(f"Error getting service by version: {e}")
+        return None
+
+    def get_service_connections(self, service_name):
+        upstream_services = self.get_upstream_services(service_name)
+        downstream_services = self.get_downstream_services(service_name)
+        return {
+            "upstream": upstream_services,
+            "downstream": downstream_services
+        }
+    
 
     def get_service_for_deployment(self, deployment_name):
         deployment = self.apps_v1.read_namespaced_deployment(name=deployment_name, namespace=self.namespace)
@@ -47,6 +123,36 @@ class KubernetesClient:
     def get_pods(self):
         pods = self.v1.list_namespaced_pod(self.namespace).items
         return [pod.metadata.name for pod in pods]
+
+
+
+    def get_deployment_resources(self, deployment_name, namespace, k8s_client):
+        deployment = self.apps_v1.read_namespaced_deployment(deployment_name, namespace)
+        containers = deployment.spec.template.spec.containers
+        total_cpu = 0
+        total_memory = 0
+
+        for container in containers:
+            if container.resources.requests:
+                if container.resources.requests.get("cpu"):
+                    cpu_request = container.resources.requests["cpu"]
+                    if cpu_request.endswith('m'):
+                        total_cpu += int(cpu_request.rstrip('m'))
+                    else:
+                        total_cpu += int(float(cpu_request) * 1000)  # Convert cores to millicores
+
+                if container.resources.requests.get("memory"):
+                    memory_request = container.resources.requests["memory"]
+                    if memory_request.endswith('Mi'):
+                        total_memory += int(memory_request.rstrip('Mi'))
+                    elif memory_request.endswith('Gi'):
+                        total_memory += int(float(memory_request.rstrip('Gi')) * 1024)  # Convert Gi to Mi
+                    elif memory_request.endswith('Ki'):
+                        total_memory += int(memory_request.rstrip('Ki')) // 1024  # Convert Ki to Mi
+
+        return {"cpu": total_cpu, "memory": total_memory}
+
+
 
     def get_service_versions(self):
         services = self.v1.list_namespaced_service(self.namespace).items
@@ -69,7 +175,8 @@ class KubernetesClient:
         return deployment.metadata.labels.get('app'), deployment.metadata.labels.get('version')
 
     def apply_yaml(self, yaml_content):
-        yaml_object = yaml.safe_load(yaml_content)
+        yaml_string = yaml.dump(yaml_content, default_flow_style=False)
+        yaml_object = yaml.safe_load(yaml_string)
         group, version = yaml_object["apiVersion"].split('/')
         plural = yaml_object["kind"].lower() + "s"
         name = yaml_object["metadata"]["name"]
@@ -174,12 +281,12 @@ class KubernetesClient:
                         }
                     }
 
-                yamls[(source, source_version)] = yaml.dump(yaml_content, default_flow_style=False)
+                yamls[(source, source_version)] = yaml_content
 
                 # Save to file
                 with open(file_path, 'w') as file:
                     yaml.dump(yaml_content, file, default_flow_style=False)
-   
+                #print(f"Updated/Created VirtualService YAML at {file_path}")
 
         return yamls
 
@@ -205,15 +312,15 @@ spec:
       simple: LEAST_CONN
 """
 
-        return yaml_content
+        return yaml.safe_load(yaml_content)
 
     def reset_weights(self, original_edges):
         for edge in original_edges:
             source, destination, weight = edge
             source_name, source_version = self.get_labels_from_deployment(source)
             destination_name, destination_version = self.get_labels_from_deployment(destination)
-            virtual_service_yaml = self.create_virtual_service_yaml([(source_name, source_version, destination_name, destination_version, weight)], {})
-            print(f"Resetting weight for {source} to {destination} to {weight}")
+            virtual_service_yaml = self.create_virtual_service_yaml([(source_name, source_version, destination_name, destination_version, weight)])
+            #print(f"Resetting weight for {source} to {destination} to {weight}")
             self.apply_yaml(virtual_service_yaml[(source_name, destination_name)])
 
     def distribute_remaining_weights(self, source, destination_weights):
@@ -226,21 +333,33 @@ spec:
             destination_weights[dest] = equal_weight
 
     def apply_virtual_service(self, service_routes):
-        # Delete existing files in the virtualservice directory
-        for filename in os.listdir(self.virtualservice_dir):
-            file_path = os.path.join(self.virtualservice_dir, filename)
-            if os.path.isfile(file_path):
-                os.remove(file_path)
-               
+        # Delete existing files in the virtualservice and trafficyaml directories
+        for directory in [self.virtualservice_dir, self.trafficyaml_dir]:
+            for filename in os.listdir(directory):
+                file_path = os.path.join(directory, filename)
+                if os.path.isfile(file_path):
+                    try:
+                        os.remove(file_path)
+                    except FileNotFoundError:
+                        # 파일이 없으면 오류를 무시하고 넘어갑니다.
+                        pass
         
         virtual_service_yamls = self.create_virtual_service_yaml(service_routes)
         for vs_yaml in virtual_service_yamls.values():
             self.apply_yaml(vs_yaml)
+            # Save to trafficyaml directory
+            file_path = os.path.join(self.trafficyaml_dir, f"{vs_yaml['metadata']['name']}.yaml")
+            with open(file_path, 'w') as file:
+                yaml.dump(vs_yaml, file, default_flow_style=False)
 
     def apply_destination_rules(self, service_versions):
         for service, versions in service_versions.items():
             destination_rule_yaml = self.create_destination_rule_yaml(service, versions)
             self.apply_yaml(destination_rule_yaml)
+            # Save to trafficyaml directory
+            file_path = os.path.join(self.trafficyaml_dir, f"{service}-dr.yaml")
+            with open(file_path, 'w') as file:
+                yaml.dump(destination_rule_yaml, file, default_flow_style=False)
 
     def update_node_selector(self, replacement_nodes):
         for service, (version, worker) in replacement_nodes.items():
@@ -253,6 +372,21 @@ spec:
 
             try:
                 node_affinity = deployment.spec.template.spec.affinity.node_affinity
+                current_workers = set()
+
+                if node_affinity:
+                    node_selector_terms = node_affinity.required_during_scheduling_ignored_during_execution.node_selector_terms
+                    for term in node_selector_terms:
+                        for expression in term.match_expressions:
+                            if expression.key == "kubernetes.io/hostname":
+                                current_workers.update(expression.values)
+
+                # 이미 설정된 워커와 변경하려는 워커가 동일한 경우 업데이트를 생략
+                if worker in current_workers:
+                    print(f"Node selector for deployment {deployment_name} is already set to {worker}. Skipping update.")
+                    continue
+
+                # 새로운 노드 선택자 설정
                 if not node_affinity:
                     deployment.spec.template.spec.affinity = client.V1Affinity(
                         node_affinity=client.V1NodeAffinity(
@@ -273,18 +407,28 @@ spec:
                     )
                 else:
                     node_selector_terms = node_affinity.required_during_scheduling_ignored_during_execution.node_selector_terms
+                    worker_added = False
                     for term in node_selector_terms:
                         for expression in term.match_expressions:
-                            if (expression.key == "kubernetes.io/hostname" and worker not in expression.values):
-                                expression.values.append(worker)
-                            else:
-                                term.match_expressions.append(
+                            if expression.key == "kubernetes.io/hostname":
+                                if worker not in expression.values:
+                                    expression.values.append(worker)
+                                worker_added = True
+                                break
+                        if worker_added:
+                            break
+                    if not worker_added:
+                        node_selector_terms.append(
+                            client.V1NodeSelectorTerm(
+                                match_expressions=[
                                     client.V1NodeSelectorRequirement(
                                         key="kubernetes.io/hostname",
                                         operator="In",
                                         values=[worker]
                                     )
-                                )
+                                ]
+                            )
+                        )
             except KeyError as e:
                 print(f"KeyError: {e} in deployment {deployment_name}")
                 continue
@@ -295,6 +439,29 @@ spec:
                     namespace=self.namespace,
                     body=deployment
                 )
-               
+                #print(f"Updated nodeSelector for deployment {deployment_name} to {worker}")
             except client.exceptions.ApiException as e:
                 print(f"Failed to update deployment {deployment_name}: {e}")
+
+
+
+    def find_connected_deployments(self, deployment_name):
+        app_label, version_label = self.get_labels_from_deployment(deployment_name)
+        connected_deployments = {}
+
+        if not app_label:
+            print(f"App label not found for deployment: {deployment_name}")
+            return connected_deployments
+
+        # Find the service the deployment belongs to
+        service_name = self.get_service_for_deployment(deployment_name)
+
+        # Find services connected to this service
+        services = self.v1.list_namespaced_service(self.namespace).items
+        connected_services = [svc.metadata.name for svc in services if svc.metadata.name != service_name]
+
+        # Find deployments for each connected service
+        for connected_service in connected_services:
+            connected_deployments[connected_service] = self.get_versions_for_service(connected_service)
+
+        return connected_deployments

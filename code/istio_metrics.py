@@ -6,8 +6,13 @@ class IstioMetrics:
 
     def get_request_durations(self, namespace):
         query = (
-            f'sum(rate(istio_request_duration_milliseconds_sum{{reporter="source", destination_service_namespace="{namespace}"}}[5m])) by (source_workload, destination_workload) / '
-            f'sum(rate(istio_request_duration_milliseconds_count{{reporter="source", destination_service_namespace="{namespace}"}}[5m])) by (source_workload, destination_workload)'
+            f'('
+            f'istio_request_duration_milliseconds_sum{{kubernetes_namespace="{namespace}"}} - '
+            f'istio_request_duration_milliseconds_sum{{kubernetes_namespace="{namespace}"}} offset 3m) '
+            f'/'
+            # f'/1000/'
+            f'(istio_requests_total{{kubernetes_namespace="{namespace}"}} - '
+            f'istio_requests_total{{kubernetes_namespace="{namespace}"}} offset 3m)'
         )
         result = self.prom.custom_query(query)
         return self.parse_istio_metrics(result)

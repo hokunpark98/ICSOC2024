@@ -1,0 +1,136 @@
+{i}번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 158 times, 95th percentile 270 ms, 99th percentile 286 ms
+1 users: Total requests sent: 1000, over threshold 157 times, 95th percentile 274 ms, 99th percentile 288 ms
+1 users: Total requests sent: 1000, over threshold 167 times, 95th percentile 274 ms, 99th percentile 289 ms
+1 users: Total requests sent: 1000, over threshold 130 times, 95th percentile 269 ms, 99th percentile 284 ms
+0번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 181 times, 95th percentile 280 ms, 99th percentile 313 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 187 times, 95th percentile 278 ms, 99th percentile 300 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 137 times, 95th percentile 273 ms, 99th percentile 298 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 120 times, 95th percentile 263 ms, 99th percentile 282 ms
+----------------------------------
+1번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 161 times, 95th percentile 276 ms, 99th percentile 300 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 148 times, 95th percentile 270 ms, 99th percentile 304 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 137 times, 95th percentile 271 ms, 99th percentile 291 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 96 times, 95th percentile 269 ms, 99th percentile 288 ms
+----------------------------------
+2번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 174 times, 95th percentile 279 ms, 99th percentile 312 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 96 times, 95th percentile 266 ms, 99th percentile 294 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 84 times, 95th percentile 262 ms, 99th percentile 284 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 86 times, 95th percentile 260 ms, 99th percentile 280 ms
+----------------------------------
+3번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 193 times, 95th percentile 280 ms, 99th percentile 352 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 135 times, 95th percentile 265 ms, 99th percentile 294 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 65 times, 95th percentile 256 ms, 99th percentile 282 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 69 times, 95th percentile 255 ms, 99th percentile 279 ms
+----------------------------------
+4번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 188 times, 95th percentile 277 ms, 99th percentile 329 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 85 times, 95th percentile 264 ms, 99th percentile 298 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 74 times, 95th percentile 259 ms, 99th percentile 288 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 119 times, 95th percentile 271 ms, 99th percentile 296 ms
+----------------------------------
+5번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 159 times, 95th percentile 275 ms, 99th percentile 312 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 155 times, 95th percentile 271 ms, 99th percentile 300 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 140 times, 95th percentile 267 ms, 99th percentile 282 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 153 times, 95th percentile 270 ms, 99th percentile 286 ms
+----------------------------------
+6번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 189 times, 95th percentile 276 ms, 99th percentile 314 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 112 times, 95th percentile 269 ms, 99th percentile 317 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 150 times, 95th percentile 275 ms, 99th percentile 288 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 146 times, 95th percentile 277 ms, 99th percentile 296 ms
+----------------------------------
+7번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 162 times, 95th percentile 277 ms, 99th percentile 310 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 175 times, 95th percentile 278 ms, 99th percentile 305 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 89 times, 95th percentile 260 ms, 99th percentile 289 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 138 times, 95th percentile 271 ms, 99th percentile 287 ms
+----------------------------------
+8번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 188 times, 95th percentile 277 ms, 99th percentile 308 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 227 times, 95th percentile 282 ms, 99th percentile 326 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 225 times, 95th percentile 280 ms, 99th percentile 288 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 277 times, 95th percentile 282 ms, 99th percentile 294 ms
+----------------------------------
+9번째 실험 시작
+기본 전송
+1 users: Total requests sent: 1000, over threshold 166 times, 95th percentile 276 ms, 99th percentile 323 ms
+제안 기법 적용_1
+제안 기법 적용_1 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 173 times, 95th percentile 278 ms, 99th percentile 301 ms
+제안 기법 적용_2
+제안 기법 적용_2 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 128 times, 95th percentile 270 ms, 99th percentile 286 ms
+제안 기법 적용_3
+제안 기법 적용_3 적용해서 전송한 결과
+1 users: Total requests sent: 1000, over threshold 115 times, 95th percentile 266 ms, 99th percentile 284 ms
+----------------------------------

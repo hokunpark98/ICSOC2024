@@ -10,37 +10,16 @@ spec:
   - match:
     - sourceLabels:
         app: service-c
-        version: service-c3
-    route:
-    - destination:
-        host: service-d
-        subset: service-d1
-      weight: 34
-    - destination:
-        host: service-d
-        subset: service-d2
-      weight: 33
-    - destination:
-        host: service-d
-        subset: service-d3
-      weight: 33
-  - match:
-    - sourceLabels:
-        app: service-c
         version: service-c1
     route:
     - destination:
         host: service-d
-        subset: service-d1
-      weight: 34
+        subset: service-d3
+      weight: 50
     - destination:
         host: service-d
         subset: service-d2
-      weight: 33
-    - destination:
-        host: service-d
-        subset: service-d3
-      weight: 33
+      weight: 50
   - match:
     - sourceLabels:
         app: service-c
@@ -48,13 +27,30 @@ spec:
     route:
     - destination:
         host: service-d
-        subset: service-d1
+        subset: service-d3
       weight: 34
+    - destination:
+        host: service-d
+        subset: service-d1
+      weight: 33
     - destination:
         host: service-d
         subset: service-d2
       weight: 33
+  - match:
+    - sourceLabels:
+        app: service-c
+        version: service-c3
+    route:
     - destination:
         host: service-d
         subset: service-d3
+      weight: 34
+    - destination:
+        host: service-d
+        subset: service-d1
+      weight: 33
+    - destination:
+        host: service-d
+        subset: service-d2
       weight: 33
