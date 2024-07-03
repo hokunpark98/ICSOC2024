@@ -7,17 +7,11 @@ spec:
   host: service-d
   subsets:
   - labels:
-      version: service-d3
-    name: service-d3
+      version: service-d1
+    name: service-d1
   - labels:
       version: service-d2
     name: service-d2
-  - labels:
-      version: service-d4
-    name: service-d4
-  - labels:
-      version: service-d1
-    name: service-d1
   trafficPolicy:
     loadBalancer:
       simple: LEAST_CONN

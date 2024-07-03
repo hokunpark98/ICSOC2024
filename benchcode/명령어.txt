@@ -1,0 +1,6 @@
+wrk2 -t4 -c20 -d30s -R1000 --latency "http://10.110.152.34:11000/a?value=1" -s /home/dnc/master/customBench/code/load_test.lua
+
+python3 /home/dnc/master/paper2024/repackaging/main.py "paper2" "http://10.108.230.9:8080" 150
+
+wrk2 -t5 -c10 -d120s -R20 --latency "http://10.110.152.34:11000/a?value=1" -s /home/dnc/master/paper2024/benchcode/load_test.lua
+

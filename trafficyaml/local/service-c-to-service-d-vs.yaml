@@ -10,12 +10,13 @@ spec:
   - match:
     - sourceLabels:
         app: service-c
-        version: service-c2
+        version: service-c1
     route:
     - destination:
         host: service-d
-        subset: service-d3
-      weight: 100
+        subset: service-d2
+      weight: 100       
+      
   - match:
     - sourceLabels:
         app: service-c
@@ -24,13 +25,4 @@ spec:
     - destination:
         host: service-d
         subset: service-d4
-      weight: 100
-  - match:
-    - sourceLabels:
-        app: service-c
-        version: service-c1
-    route:
-    - destination:
-        host: service-d
-        subset: service-d2
-      weight: 100
+      weight: 100         
