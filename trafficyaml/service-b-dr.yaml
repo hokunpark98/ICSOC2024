@@ -7,11 +7,14 @@ spec:
   host: service-b
   subsets:
   - labels:
+      version: service-b1
+    name: service-b1
+  - labels:
       version: service-b2
     name: service-b2
   - labels:
-      version: service-b1
-    name: service-b1
+      version: service-b3
+    name: service-b3
   trafficPolicy:
     loadBalancer:
       simple: LEAST_CONN

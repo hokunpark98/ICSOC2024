@@ -7,11 +7,14 @@ spec:
   host: service-c
   subsets:
   - labels:
-      version: service-c2
-    name: service-c2
+      version: service-c4
+    name: service-c4
   - labels:
       version: service-c3
     name: service-c3
+  - labels:
+      version: service-c2
+    name: service-c2
   - labels:
       version: service-c1
     name: service-c1

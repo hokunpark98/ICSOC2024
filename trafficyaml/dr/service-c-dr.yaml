@@ -15,6 +15,9 @@ spec:
   - labels:
       version: service-c1
     name: service-c1
+  - labels:
+      version: service-c4
+    name: service-c4    
   trafficPolicy:
     loadBalancer:
       simple: LEAST_CONN

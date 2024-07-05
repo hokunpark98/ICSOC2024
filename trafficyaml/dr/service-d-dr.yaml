@@ -12,6 +12,7 @@ spec:
   - labels:
       version: service-d2
     name: service-d2
+    
   trafficPolicy:
     loadBalancer:
       simple: LEAST_CONN
