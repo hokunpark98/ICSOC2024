@@ -48,20 +48,22 @@ def run_proposed_method(namespace, prometheus_url, method):
     print('original graph map')
     print_graph_map(graph_map)
     
+    service_routes = []
     # above_threshold 경로 중 제거해야할 간선을 공식화하고 ILP로 해결 (수정 요함)
     if method == "proposed":
-        service_routes, service_versions = traffic_allocation(graph_map, v1, prom, namespace, dag)
+        service_routes, service_versions = traffic_allocation(v1, prom, namespace, dag)
     elif method == "local":
         service_routes, service_versions = traffic_allocation_localization(graph_map, v1, prom, namespace, dag)
 
     service_routes = sorted(service_routes, key=lambda x: x[0])
+    
     print('service_routes (sorted)')
     for service_route in service_routes:
         print(service_route)
 
     # 정보를 반영함    
-    apply_virtual_service(custom_objects_api, service_routes)
-    apply_destination_rules(namespace, custom_objects_api, service_versions)
+    #apply_virtual_service(custom_objects_api, service_routes)
+    #apply_destination_rules(namespace, custom_objects_api, service_versions)
     
     print("Complete")
 

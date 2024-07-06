@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: loki-memberlist-dr
+  namespace: default
+spec:
+  host: loki-memberlist
+  subsets: null
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN

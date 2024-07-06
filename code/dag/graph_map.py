@@ -24,6 +24,7 @@ def print_graph_map(graph_map):
         print(f"  Upstream: {connections['upstream']}")
         print(f"  Downstream: {connections['downstream']}")
 
+        
 def calculate_required_traffic(upstream_count, downstream_nodes):
     total_traffic = upstream_count * 100
     downstream_count = len(downstream_nodes)
@@ -44,62 +45,74 @@ def calculate_required_traffic(upstream_count, downstream_nodes):
     
     return downstream_traffic
 
+
 def get_traffic_requirements(nodes, services_dict):
     upstream_traffic = defaultdict(int)
     downstream_traffic = defaultdict(int)
-    
+
     for source_service, details in services_dict.items():
         upstream_nodes = [node for node in nodes if node.startswith(source_service)]
         downstream_services = details['downstream']
         if not downstream_services:
             continue
+
+        # Assign traffic to each out node separately
         for node in upstream_nodes:
-            upstream_traffic[node] += 100
-        
-        for destination_service in downstream_services:
+            downstream_groups = details['downstream']
+            for i in range(len(downstream_groups)):
+                upstream_traffic[f"{node}_out{i+1}"] += 100
+
+        for i, destination_service in enumerate(downstream_services):
             downstream_nodes = [node for node in nodes if node.startswith(destination_service)]
             required_traffic = calculate_required_traffic(len(upstream_nodes), downstream_nodes)
             for node, traffic in required_traffic.items():
-                downstream_traffic[node] += traffic
-    
+                downstream_traffic[f"{node}_in"] += traffic
+
     return dict(downstream_traffic), dict(upstream_traffic)
 
-def build_flow_graph(graph_map, upstream_traffic, downstream_traffic, edge_weights):
-    '''
-    in: 받아야하는거
-    out: 보낼거
-    '''
-    G = nx.DiGraph()
-    #print('upstream_traffic', upstream_traffic)
-    #print('downstream', downstream_traffic)
-    for node in graph_map:
-        in_node = f"{node}_in"
-        out_node = f"{node}_out"
-        G.add_node(in_node, demand=downstream_traffic.get(node, 0))
-        G.add_node(out_node, demand=-upstream_traffic.get(node, 0))
-        G.add_edge(in_node, out_node, weight=0, capacity=100)
 
-    
-    # 중간 노드들의 간선 설정
+
+
+def build_flow_graph(graph_map, upstream_traffic, downstream_traffic, edge_weights):
+    G = nx.DiGraph()
+
+    for node in graph_map:
+        downstream_groups = graph_map[node]['downstream']
+        print('nod', node)
+        for i, group in enumerate(downstream_groups):
+            print('i, group', i, group)
+            out_node = f"{node}_out{i+1}"
+            G.add_node(out_node, demand=-upstream_traffic.get(out_node, 0))
+            for d_node in group:
+                in_node = f"{d_node}_in"
+                print('d_node', in_node)
+                print(downstream_traffic.get(in_node, 0))
+                G.add_node(in_node, demand=downstream_traffic.get(in_node, 0))
+            G.add_edge(in_node, out_node, weight=0, capacity=100)
+
     for u_node in graph_map:
-        u_out_node = f"{u_node}_out"
-        for d_node in graph_map[u_node]['downstream']:
-            d_in_node = f"{d_node}_in"
-            G.add_edge(u_out_node, d_in_node, weight=edge_weights[(u_node, d_node)], capacity=100)
-            #print(f"Edge from {u_out_node} to {d_in_node}")
-    
-    # 각 노드의 수요 출력
-    '''
+        downstream_groups = graph_map[u_node]['downstream']
+        for i, group in enumerate(downstream_groups):
+            u_out_node = f"{u_node}_out{i+1}"
+            print('u_out_node', u_out_node)
+            for d_node in group:
+                print('d_node', d_node)
+                d_in_node = f"{d_node}_in"
+                G.add_edge(u_out_node, d_in_node, weight=edge_weights[(u_node, d_node)], capacity=100)
+                print(f"Edge from {u_out_node} to {d_in_node} {edge_weights[(u_node, d_node)]}")
+
+
     total_demand = 0
     for node, data in G.nodes(data=True):
-        demand = data['demand']
+        demand = data.get('demand', 0)
         print(f"Node {node} has demand {demand}")
         total_demand += demand
-    
+
     print(f"Total demand in the graph: {total_demand}")
-    '''
-    
+
     return G
+
+
 
 
 def find_optimal_routing(graph_map, upstream_traffic, downstream_traffic, edge_weights, filename='graph.png'):
@@ -118,52 +131,107 @@ def find_optimal_routing(graph_map, upstream_traffic, downstream_traffic, edge_w
     plt.savefig(filename)
     
     flow_dict = nx.min_cost_flow(G)
-    #print('findOptimal')
     
     return flow_dict
 
-def traffic_allocation(graph_map, v1, prom, namespace, dag):
+def create_graph_map2(service_versions, services_dict):
+    graph_map = {}
+
+    # Initialize graph map with empty upstream and downstream lists
+    for service, versions in service_versions.items():
+        for version in versions:
+            graph_map[version] = {'upstream': [], 'downstream': []}
+
+    # Fill in the upstream and downstream connections
+    for service, connections in services_dict.items():
+        for upstream_service in connections['upstream']:
+            for u_version in service_versions[upstream_service]:
+                for d_version in service_versions[service]:
+                    if d_version not in graph_map:
+                        graph_map[d_version] = {'upstream': [], 'downstream': []}
+                    if u_version not in graph_map:
+                        graph_map[u_version] = {'upstream': [], 'downstream': []}
+
+                    graph_map[d_version]['upstream'].append(u_version)
+                    graph_map[u_version]['downstream'].append(d_version)
+
+    # Ensure nested list format for upstream and downstream connections
+    for node, connections in graph_map.items():
+        # Group downstream connections by their service
+        downstream_groups = defaultdict(list)
+        for downstream_node in connections['downstream']:
+            service_name = downstream_node.split('-')[0]
+            downstream_groups[service_name].append(downstream_node)
+        
+        # Convert to list of lists format
+        connections['downstream'] = [group for group in downstream_groups.values()]
+
+        # Ensure upstream connections are also in a nested list format if needed
+        if connections['upstream'] and not isinstance(connections['upstream'][0], list):
+            connections['upstream'] = [connections['upstream']]
+
+    return graph_map
+
+
+
+
+def traffic_allocation(v1, prom, namespace, dag):
     services_dict = get_services_relation(prom, namespace)
     service_versions = get_service_versions(v1, namespace)
     version_node_map = get_versions_on_nodes(v1, namespace)
     node_to_node_durations = get_probe_icmp_durations(prom)
+    graph_map = create_graph_map2(service_versions, services_dict)
+    #print(services_dict)
+    print('-----------------------------')
+    print_graph_map(graph_map)
 
     edge_weights = {}
     for u_node in graph_map:
-        for d_node in graph_map[u_node]['downstream']:
-            u_version = version_node_map[u_node][0]
-            d_version = version_node_map[d_node][0]
-            edge_weights[(u_node, d_node)] = int(node_to_node_durations[u_version][d_version])
+        for downstream_group in graph_map[u_node]['downstream']:
+            for d_node in downstream_group:
+                u_version = version_node_map[u_node][0]
+                d_version = version_node_map[d_node][0]
+                edge_weights[(u_node, d_node)] = int(node_to_node_durations[u_version][d_version])
 
-    #print('edge_weights', edge_weights)
     nodes = list(graph_map.keys())
     downstream_traffic, upstream_traffic = get_traffic_requirements(nodes, services_dict)
+    #print('downstream_traffic', downstream_traffic)
+    #print('upstream_traffic', upstream_traffic)
     
     flow_dict = find_optimal_routing(graph_map, upstream_traffic, downstream_traffic, edge_weights)
-
+    #print(flow_dict)
     service_routes = []
 
     for u_node in flow_dict:
         for d_node, flow in flow_dict[u_node].items():
+            #print('u_node d_node flow', u_node, d_node, flow)
             if flow > 0:
-                u_node_base = u_node.replace("_out", "")
-                d_node_base = d_node.replace("_in", "")
+                u_node_base = u_node.split("_out")[0]
+                d_node_base = d_node.split("_in")[0]
                 source_service, source_version = None, None
                 dest_service, dest_version = None, None
-
+                #print('u_node_base', u_node_base)
+                #print('d_node_base', d_node_base)
+                
                 for service, versions in service_versions.items():
+                    #print('service, versions', service, versions)
                     if u_node_base in versions:
                         source_service = service
                         source_version = u_node_base
+                        
                     if d_node_base in versions:
                         dest_service = service
                         dest_version = d_node_base
 
                 if source_service and dest_service:
                     service_routes.append((source_service, source_version, dest_service, dest_version, int(flow)))
+                    #print('sdafasdf', (source_service, source_version, dest_service, dest_version, int(flow)))
 
-    #print('traffic_allocation')
+    print(service_routes)
     return service_routes, service_versions
+
+
+
 
 
 '''

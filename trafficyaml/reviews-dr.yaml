@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews-dr
+  namespace: default
+spec:
+  host: reviews
+  subsets:
+  - labels:
+      version: reviews-v2
+    name: reviews-v2
+  - labels:
+      version: reviews-v1
+    name: reviews-v1
+  - labels:
+      version: reviews-v3
+    name: reviews-v3
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
