@@ -1,0 +1,33 @@
+{
+    "services": [
+      {
+        "service-name": "details",
+        "replica": 4,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/bookinfoBench/deployment/details.yaml"
+      },
+      {
+        "service-name": "productpage",
+        "replica": 5,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/bookinfoBench/deployment/products.yaml"
+      },
+      {
+        "service-name": "ratings",
+        "replica": 5,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/bookinfoBench/deployment/ratings.yaml"
+      },
+      {
+        "service-name": "reviews",
+        "replica": 4,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/bookinfoBench/deployment/reviews.yaml"
+      }
+    ]
+  }
+  

@@ -1,0 +1,1698 @@
+Deleting existing deployments...
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-a.yaml": deployments.apps "service-a1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-a.yaml": deployments.apps "service-a2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-a.yaml": deployments.apps "service-a3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-a.yaml": deployments.apps "service-a4" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-a.yaml": deployments.apps "service-a5" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-b.yaml": deployments.apps "service-b1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-b.yaml": deployments.apps "service-b2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-b.yaml": deployments.apps "service-b3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-c.yaml": deployments.apps "service-c1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-c.yaml": deployments.apps "service-c2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-c.yaml": deployments.apps "service-c3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-c.yaml": deployments.apps "service-c4" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-d.yaml": deployments.apps "service-d1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-d.yaml": deployments.apps "service-d2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-d.yaml": deployments.apps "service-d3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-e.yaml": deployments.apps "service-e1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-e.yaml": deployments.apps "service-e2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-e.yaml": deployments.apps "service-e3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-e.yaml": deployments.apps "service-e4" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/customBench/yaml/deployment_localization/service-e.yaml": deployments.apps "service-e5" not found
+Deleting existing virtual services...
+virtualservice.networking.istio.io "service-a-to-service-b-vs" deleted
+virtualservice.networking.istio.io "service-b-to-service-c-vs" deleted
+virtualservice.networking.istio.io "service-c-to-service-d-vs" deleted
+virtualservice.networking.istio.io "service-d-to-service-e-vs" deleted
+destinationrule.networking.istio.io "service-a-dr" deleted
+destinationrule.networking.istio.io "service-b-dr" deleted
+destinationrule.networking.istio.io "service-c-dr" deleted
+destinationrule.networking.istio.io "service-d-dr" deleted
+destinationrule.networking.istio.io "service-e-dr" deleted
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=10...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 127.171ms, rate sampling interval: 510ms
+  Thread calibration: mean lat.: 127.904ms, rate sampling interval: 507ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    82.97ms   15.64ms 158.59ms   66.36%
+    Req/Sec     4.55      4.38     9.00    100.00%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   77.31ms
+ 75.000%   97.60ms
+ 90.000%  102.78ms
+ 99.000%  124.86ms
+ 99.900%  153.60ms
+ 99.990%  158.72ms
+ 99.999%  158.72ms
+100.000%  158.72ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      54.399     0.000000            1         1.00
+      66.111     0.100000          112         1.11
+      70.143     0.200000          222         1.25
+      72.319     0.300000          333         1.43
+      74.559     0.400000          445         1.67
+      77.311     0.500000          550         2.00
+      80.063     0.550000          606         2.22
+      84.735     0.600000          660         2.50
+      89.983     0.650000          715         2.86
+      95.167     0.700000          771         3.33
+      97.599     0.750000          828         4.00
+      98.367     0.775000          855         4.44
+      99.007     0.800000          880         5.00
+     100.159     0.825000          910         5.71
+     100.799     0.850000          935         6.67
+     101.951     0.875000          963         8.00
+     102.463     0.887500          977         8.89
+     102.783     0.900000          993        10.00
+     103.295     0.912500         1005        11.43
+     104.191     0.925000         1018        13.33
+     105.279     0.937500         1032        16.00
+     105.791     0.943750         1039        17.78
+     106.623     0.950000         1047        20.00
+     106.943     0.956250         1052        22.86
+     107.775     0.962500         1059        26.67
+     108.927     0.968750         1066        32.00
+     110.719     0.971875         1070        35.56
+     112.127     0.975000         1073        40.00
+     113.023     0.978125         1076        45.71
+     115.583     0.981250         1080        53.33
+     116.991     0.984375         1083        64.00
+     118.015     0.985938         1085        71.11
+     120.639     0.987500         1087        80.00
+     123.199     0.989062         1088        91.43
+     124.927     0.990625         1090       106.67
+     126.975     0.992188         1092       128.00
+     127.359     0.992969         1093       142.22
+     129.279     0.993750         1094       160.00
+     129.279     0.994531         1094       182.86
+     139.903     0.995313         1095       213.33
+     140.287     0.996094         1096       256.00
+     145.535     0.996484         1097       284.44
+     145.535     0.996875         1097       320.00
+     145.535     0.997266         1097       365.71
+     146.815     0.997656         1098       426.67
+     146.815     0.998047         1098       512.00
+     153.599     0.998242         1099       568.89
+     153.599     0.998437         1099       640.00
+     153.599     0.998633         1099       731.43
+     153.599     0.998828         1099       853.33
+     153.599     0.999023         1099      1024.00
+     158.719     0.999121         1100      1137.78
+     158.719     1.000000         1100          inf
+#[Mean    =       82.967, StdDeviation   =       15.638]
+#[Max     =      158.592, Total count    =         1100]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  1200 requests in 2.00m, 290.80KB read
+Requests/sec:     10.00
+Transfer/sec:      2.42KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=30...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 96.848ms, rate sampling interval: 291ms
+  Thread calibration: mean lat.: 100.026ms, rate sampling interval: 303ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    85.95ms   32.28ms 541.18ms   98.48%
+    Req/Sec    14.65      4.37    41.00     85.66%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   78.65ms
+ 75.000%   98.24ms
+ 90.000%  103.81ms
+ 99.000%  133.50ms
+ 99.900%  521.73ms
+ 99.990%  541.70ms
+ 99.999%  541.70ms
+100.000%  541.70ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      51.455     0.000000            1         1.00
+      67.071     0.100000          330         1.11
+      71.039     0.200000          664         1.25
+      73.471     0.300000          998         1.43
+      75.839     0.400000         1328         1.67
+      78.655     0.500000         1654         2.00
+      81.023     0.550000         1819         2.22
+      84.351     0.600000         1980         2.50
+      91.199     0.650000         2146         2.86
+      95.679     0.700000         2311         3.33
+      98.239     0.750000         2479         4.00
+      99.327     0.775000         2560         4.44
+     100.223     0.800000         2644         5.00
+     101.055     0.825000         2729         5.71
+     101.823     0.850000         2810         6.67
+     102.719     0.875000         2892         8.00
+     103.167     0.887500         2931         8.89
+     103.807     0.900000         2973        10.00
+     104.447     0.912500         3013        11.43
+     105.087     0.925000         3053        13.33
+     105.983     0.937500         3095        16.00
+     106.623     0.943750         3117        17.78
+     107.135     0.950000         3135        20.00
+     107.839     0.956250         3156        22.86
+     108.479     0.962500         3177        26.67
+     109.183     0.968750         3197        32.00
+     109.951     0.971875         3208        35.56
+     110.783     0.975000         3218        40.00
+     112.127     0.978125         3228        45.71
+     113.727     0.981250         3240        53.33
+     115.775     0.984375         3249        64.00
+     118.271     0.985938         3254        71.11
+     120.703     0.987500         3259        80.00
+     128.639     0.989062         3264        91.43
+     220.671     0.990625         3270       106.67
+     232.703     0.992188         3275       128.00
+     246.655     0.992969         3277       142.22
+     255.871     0.993750         3280       160.00
+     261.759     0.994531         3282       182.86
+     271.359     0.995313         3285       213.33
+     329.471     0.996094         3288       256.00
+     492.031     0.996484         3289       284.44
+     496.383     0.996875         3291       320.00
+     496.383     0.997266         3291       365.71
+     502.271     0.997656         3293       426.67
+     503.295     0.998047         3294       512.00
+     519.423     0.998242         3296       568.89
+     519.423     0.998437         3296       640.00
+     519.423     0.998633         3296       731.43
+     521.727     0.998828         3297       853.33
+     521.727     0.999023         3297      1024.00
+     523.007     0.999121         3298      1137.78
+     523.007     0.999219         3298      1280.00
+     523.007     0.999316         3298      1462.86
+     539.135     0.999414         3299      1706.67
+     539.135     0.999512         3299      2048.00
+     539.135     0.999561         3299      2275.56
+     539.135     0.999609         3299      2560.00
+     539.135     0.999658         3299      2925.71
+     541.695     0.999707         3300      3413.33
+     541.695     1.000000         3300          inf
+#[Mean    =       85.946, StdDeviation   =       32.285]
+#[Max     =      541.184, Total count    =         3300]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  3600 requests in 2.00m, 0.85MB read
+Requests/sec:     29.99
+Transfer/sec:      7.27KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=50...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 104.714ms, rate sampling interval: 286ms
+  Thread calibration: mean lat.: 98.649ms, rate sampling interval: 287ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    82.05ms   14.18ms 140.80ms   58.56%
+    Req/Sec    24.44      7.22    35.00     75.23%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   77.25ms
+ 75.000%   96.89ms
+ 90.000%  102.08ms
+ 99.000%  108.80ms
+ 99.900%  120.51ms
+ 99.990%  134.27ms
+ 99.999%  140.93ms
+100.000%  140.93ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      48.735     0.000000            1         1.00
+      65.663     0.100000          550         1.11
+      69.823     0.200000         1103         1.25
+      72.383     0.300000         1651         1.43
+      74.623     0.400000         2218         1.67
+      77.247     0.500000         2762         2.00
+      78.911     0.550000         3032         2.22
+      81.727     0.600000         3301         2.50
+      88.703     0.650000         3576         2.86
+      94.271     0.700000         3854         3.33
+      96.895     0.750000         4125         4.00
+      97.919     0.775000         4269         4.44
+      98.687     0.800000         4402         5.00
+      99.519     0.825000         4540         5.71
+     100.287     0.850000         4677         6.67
+     101.183     0.875000         4818         8.00
+     101.567     0.887500         4884         8.89
+     102.079     0.900000         4950        10.00
+     102.655     0.912500         5028        11.43
+     103.103     0.925000         5088        13.33
+     103.679     0.937500         5157        16.00
+     103.999     0.943750         5198        17.78
+     104.319     0.950000         5225        20.00
+     104.831     0.956250         5263        22.86
+     105.151     0.962500         5295        26.67
+     105.663     0.968750         5329        32.00
+     106.047     0.971875         5347        35.56
+     106.495     0.975000         5363        40.00
+     106.879     0.978125         5385        45.71
+     107.263     0.981250         5398        53.33
+     107.839     0.984375         5417        64.00
+     108.031     0.985938         5425        71.11
+     108.351     0.987500         5433        80.00
+     108.543     0.989062         5441        91.43
+     108.991     0.990625         5449       106.67
+     109.439     0.992188         5458       128.00
+     110.271     0.992969         5462       142.22
+     110.655     0.993750         5467       160.00
+     110.975     0.994531         5470       182.86
+     111.487     0.995313         5475       213.33
+     111.679     0.996094         5480       256.00
+     111.743     0.996484         5481       284.44
+     112.319     0.996875         5484       320.00
+     112.511     0.997266         5485       365.71
+     112.703     0.997656         5489       426.67
+     112.831     0.998047         5490       512.00
+     113.983     0.998242         5491       568.89
+     114.559     0.998437         5492       640.00
+     117.823     0.998633         5493       731.43
+     120.127     0.998828         5494       853.33
+     120.511     0.999023         5495      1024.00
+     122.047     0.999121         5496      1137.78
+     122.047     0.999219         5496      1280.00
+     126.463     0.999316         5497      1462.86
+     126.463     0.999414         5497      1706.67
+     131.007     0.999512         5498      2048.00
+     131.007     0.999561         5498      2275.56
+     131.007     0.999609         5498      2560.00
+     134.271     0.999658         5499      2925.71
+     134.271     0.999707         5499      3413.33
+     134.271     0.999756         5499      4096.00
+     134.271     0.999780         5499      4551.11
+     134.271     0.999805         5499      5120.00
+     140.927     0.999829         5500      5851.43
+     140.927     1.000000         5500          inf
+#[Mean    =       82.049, StdDeviation   =       14.185]
+#[Max     =      140.800, Total count    =         5500]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  6000 requests in 2.00m, 1.42MB read
+Requests/sec:     49.99
+Transfer/sec:     12.11KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=80...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 90.652ms, rate sampling interval: 267ms
+  Thread calibration: mean lat.: 89.535ms, rate sampling interval: 273ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    76.91ms   14.39ms 131.71ms   59.68%
+    Req/Sec    39.50      4.51    56.00     86.22%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   72.70ms
+ 75.000%   90.94ms
+ 90.000%   97.28ms
+ 99.000%  105.02ms
+ 99.900%  115.52ms
+ 99.990%  130.75ms
+ 99.999%  131.84ms
+100.000%  131.84ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      46.399     0.000000            1         1.00
+      60.351     0.100000          885         1.11
+      63.711     0.200000         1762         1.25
+      66.623     0.300000         2653         1.43
+      69.503     0.400000         3529         1.67
+      72.703     0.500000         4407         2.00
+      74.687     0.550000         4840         2.22
+      77.759     0.600000         5284         2.50
+      84.991     0.650000         5721         2.86
+      88.767     0.700000         6162         3.33
+      90.943     0.750000         6617         4.00
+      92.095     0.775000         6841         4.44
+      93.055     0.800000         7040         5.00
+      94.079     0.825000         7260         5.71
+      95.103     0.850000         7484         6.67
+      96.191     0.875000         7709         8.00
+      96.767     0.887500         7813         8.89
+      97.279     0.900000         7930        10.00
+      97.855     0.912500         8039        11.43
+      98.431     0.925000         8143        13.33
+      99.071     0.937500         8257        16.00
+      99.391     0.943750         8308        17.78
+      99.775     0.950000         8361        20.00
+     100.223     0.956250         8424        22.86
+     100.671     0.962500         8472        26.67
+     101.311     0.968750         8525        32.00
+     101.631     0.971875         8555        35.56
+     102.079     0.975000         8581        40.00
+     102.527     0.978125         8608        45.71
+     103.039     0.981250         8638        53.33
+     103.487     0.984375         8663        64.00
+     103.807     0.985938         8677        71.11
+     104.191     0.987500         8690        80.00
+     104.703     0.989062         8704        91.43
+     105.279     0.990625         8718       106.67
+     105.663     0.992188         8734       128.00
+     105.855     0.992969         8739       142.22
+     106.303     0.993750         8745       160.00
+     106.815     0.994531         8753       182.86
+     107.199     0.995313         8759       213.33
+     107.903     0.996094         8766       256.00
+     108.095     0.996484         8770       284.44
+     108.543     0.996875         8773       320.00
+     108.927     0.997266         8776       365.71
+     109.439     0.997656         8780       426.67
+     109.951     0.998047         8783       512.00
+     110.399     0.998242         8785       568.89
+     111.167     0.998437         8787       640.00
+     111.871     0.998633         8788       731.43
+     114.943     0.998828         8790       853.33
+     117.631     0.999023         8792      1024.00
+     117.887     0.999121         8793      1137.78
+     119.167     0.999219         8794      1280.00
+     119.167     0.999316         8794      1462.86
+     120.831     0.999414         8795      1706.67
+     122.239     0.999512         8796      2048.00
+     124.927     0.999561         8797      2275.56
+     124.927     0.999609         8797      2560.00
+     124.927     0.999658         8797      2925.71
+     129.215     0.999707         8798      3413.33
+     129.215     0.999756         8798      4096.00
+     130.751     0.999780         8799      4551.11
+     130.751     0.999805         8799      5120.00
+     130.751     0.999829         8799      5851.43
+     130.751     0.999854         8799      6826.67
+     130.751     0.999878         8799      8192.00
+     131.839     0.999890         8800      9102.22
+     131.839     1.000000         8800          inf
+#[Mean    =       76.908, StdDeviation   =       14.395]
+#[Max     =      131.712, Total count    =         8800]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  9600 requests in 2.00m, 2.27MB read
+Requests/sec:     79.98
+Transfer/sec:     19.37KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=100...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 111.096ms, rate sampling interval: 532ms
+  Thread calibration: mean lat.: 114.981ms, rate sampling interval: 586ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    72.26ms   16.34ms 261.63ms   70.09%
+    Req/Sec    49.48      2.61    58.00     89.82%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   65.73ms
+ 75.000%   87.10ms
+ 90.000%   92.22ms
+ 99.000%  103.17ms
+ 99.900%  196.74ms
+ 99.990%  257.41ms
+ 99.999%  261.76ms
+100.000%  261.76ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      44.255     0.000000            1         1.00
+      55.903     0.100000         1100         1.11
+      58.975     0.200000         2205         1.25
+      61.183     0.300000         3312         1.43
+      63.263     0.400000         4402         1.67
+      65.727     0.500000         5502         2.00
+      67.583     0.550000         6052         2.22
+      70.847     0.600000         6600         2.50
+      82.239     0.650000         7150         2.86
+      85.439     0.700000         7706         3.33
+      87.103     0.750000         8263         4.00
+      87.807     0.775000         8542         4.44
+      88.575     0.800000         8799         5.00
+      89.407     0.825000         9075         5.71
+      90.303     0.850000         9350         6.67
+      91.199     0.875000         9631         8.00
+      91.711     0.887500         9775         8.89
+      92.223     0.900000         9908        10.00
+      92.799     0.912500        10047        11.43
+      93.375     0.925000        10179        13.33
+      94.207     0.937500        10324        16.00
+      94.591     0.943750        10383        17.78
+      95.103     0.950000        10460        20.00
+      95.551     0.956250        10526        22.86
+      96.063     0.962500        10591        26.67
+      96.831     0.968750        10662        32.00
+      97.279     0.971875        10696        35.56
+      97.727     0.975000        10730        40.00
+      98.239     0.978125        10759        45.71
+      99.007     0.981250        10793        53.33
+      99.903     0.984375        10828        64.00
+     100.479     0.985938        10845        71.11
+     101.183     0.987500        10861        80.00
+     102.271     0.989062        10878        91.43
+     103.807     0.990625        10895       106.67
+     107.711     0.992188        10913       128.00
+     110.719     0.992969        10921       142.22
+     117.183     0.993750        10930       160.00
+     125.823     0.994531        10938       182.86
+     131.711     0.995313        10947       213.33
+     139.647     0.996094        10956       256.00
+     152.831     0.996484        10960       284.44
+     160.255     0.996875        10964       320.00
+     163.711     0.997266        10968       365.71
+     170.239     0.997656        10973       426.67
+     174.719     0.998047        10977       512.00
+     175.231     0.998242        10979       568.89
+     176.255     0.998437        10981       640.00
+     182.655     0.998633        10983       731.43
+     194.815     0.998828        10986       853.33
+     200.703     0.999023        10988      1024.00
+     201.471     0.999121        10989      1137.78
+     203.903     0.999219        10990      1280.00
+     209.919     0.999316        10991      1462.86
+     216.319     0.999414        10992      1706.67
+     219.903     0.999512        10993      2048.00
+     242.815     0.999561        10995      2275.56
+     242.815     0.999609        10995      2560.00
+     242.815     0.999658        10995      2925.71
+     242.815     0.999707        10995      3413.33
+     243.327     0.999756        10996      4096.00
+     243.327     0.999780        10996      4551.11
+     243.327     0.999805        10996      5120.00
+     257.407     0.999829        10997      5851.43
+     257.407     0.999854        10997      6826.67
+     257.407     0.999878        10997      8192.00
+     257.407     0.999890        10997      9102.22
+     257.407     0.999902        10997     10240.00
+     261.759     0.999915        10998     11702.86
+     261.759     1.000000        10998          inf
+#[Mean    =       72.257, StdDeviation   =       16.343]
+#[Max     =      261.632, Total count    =        10998]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  12000 requests in 2.00m, 2.84MB read
+Requests/sec:    100.00
+Transfer/sec:     24.22KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=150...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 834.929ms, rate sampling interval: 1975ms
+  Thread calibration: mean lat.: 914.995ms, rate sampling interval: 2250ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   124.88ms  123.97ms 890.37ms   91.96%
+    Req/Sec    74.79      1.56    81.00     92.23%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   86.65ms
+ 75.000%  122.05ms
+ 90.000%  210.43ms
+ 99.000%  706.05ms
+ 99.900%  850.94ms
+ 99.990%  876.54ms
+ 99.999%  890.88ms
+100.000%  890.88ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      43.071     0.000000            1         1.00
+      52.703     0.100000         1664         1.11
+      58.847     0.200000         3317         1.25
+      70.271     0.300000         4978         1.43
+      80.895     0.400000         6641         1.67
+      86.655     0.500000         8290         2.00
+      91.199     0.550000         9121         2.22
+      97.279     0.600000         9948         2.50
+     103.743     0.650000        10782         2.86
+     111.615     0.700000        11605         3.33
+     122.047     0.750000        12438         4.00
+     128.255     0.775000        12852         4.44
+     135.423     0.800000        13262         5.00
+     144.255     0.825000        13677         5.71
+     155.647     0.850000        14090         6.67
+     174.719     0.875000        14506         8.00
+     189.951     0.887500        14712         8.89
+     210.431     0.900000        14923        10.00
+     232.959     0.912500        15126        11.43
+     269.055     0.925000        15333        13.33
+     344.575     0.937500        15540        16.00
+     378.367     0.943750        15644        17.78
+     411.391     0.950000        15748        20.00
+     461.823     0.956250        15852        22.86
+     497.407     0.962500        15955        26.67
+     539.135     0.968750        16060        32.00
+     557.055     0.971875        16111        35.56
+     568.319     0.975000        16162        40.00
+     581.631     0.978125        16216        45.71
+     595.967     0.981250        16268        53.33
+     624.639     0.984375        16317        64.00
+     652.287     0.985938        16343        71.11
+     669.183     0.987500        16370        80.00
+     690.687     0.989062        16396        91.43
+     724.479     0.990625        16421       106.67
+     752.127     0.992188        16447       128.00
+     765.439     0.992969        16460       142.22
+     779.775     0.993750        16474       160.00
+     793.087     0.994531        16486       182.86
+     803.839     0.995313        16499       213.33
+     811.519     0.996094        16512       256.00
+     817.151     0.996484        16518       284.44
+     820.223     0.996875        16525       320.00
+     823.807     0.997266        16532       365.71
+     830.463     0.997656        16539       426.67
+     833.023     0.998047        16544       512.00
+     836.095     0.998242        16547       568.89
+     839.679     0.998437        16551       640.00
+     845.311     0.998633        16554       731.43
+     848.383     0.998828        16557       853.33
+     853.503     0.999023        16560      1024.00
+     854.527     0.999121        16562      1137.78
+     857.087     0.999219        16564      1280.00
+     858.623     0.999316        16565      1462.86
+     861.183     0.999414        16567      1706.67
+     861.695     0.999512        16568      2048.00
+     862.719     0.999561        16569      2275.56
+     869.887     0.999609        16571      2560.00
+     869.887     0.999658        16571      2925.71
+     871.935     0.999707        16572      3413.33
+     871.935     0.999756        16572      4096.00
+     873.983     0.999780        16573      4551.11
+     873.983     0.999805        16573      5120.00
+     876.543     0.999829        16574      5851.43
+     876.543     0.999854        16574      6826.67
+     876.543     0.999878        16574      8192.00
+     877.055     0.999890        16575      9102.22
+     877.055     0.999902        16575     10240.00
+     877.055     0.999915        16575     11702.86
+     877.055     0.999927        16575     13653.33
+     877.055     0.999939        16575     16384.00
+     890.879     0.999945        16576     18204.44
+     890.879     1.000000        16576          inf
+#[Mean    =      124.882, StdDeviation   =      123.974]
+#[Max     =      890.368, Total count    =        16576]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  17990 requests in 2.00m, 4.25MB read
+Requests/sec:    149.90
+Transfer/sec:     36.31KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=10...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 135.316ms, rate sampling interval: 526ms
+  Thread calibration: mean lat.: 147.395ms, rate sampling interval: 519ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    82.47ms   14.64ms 141.57ms   64.55%
+    Req/Sec     4.68      4.35     9.00    100.00%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   77.06ms
+ 75.000%   96.32ms
+ 90.000%  102.14ms
+ 99.000%  122.88ms
+ 99.900%  135.04ms
+ 99.990%  141.70ms
+ 99.999%  141.70ms
+100.000%  141.70ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      55.455     0.000000            1         1.00
+      66.623     0.100000          110         1.11
+      69.823     0.200000          221         1.25
+      71.999     0.300000          331         1.43
+      74.303     0.400000          444         1.67
+      77.055     0.500000          552         2.00
+      78.911     0.550000          606         2.22
+      82.687     0.600000          660         2.50
+      90.303     0.650000          717         2.86
+      93.759     0.700000          770         3.33
+      96.319     0.750000          828         4.00
+      97.087     0.775000          854         4.44
+      98.239     0.800000          882         5.00
+      99.007     0.825000          908         5.71
+      99.647     0.850000          936         6.67
+     100.735     0.875000          963         8.00
+     101.567     0.887500          978         8.89
+     102.143     0.900000          990        10.00
+     102.847     0.912500         1004        11.43
+     103.487     0.925000         1018        13.33
+     104.191     0.937500         1033        16.00
+     104.511     0.943750         1039        17.78
+     104.831     0.950000         1045        20.00
+     105.279     0.956250         1053        22.86
+     105.983     0.962500         1059        26.67
+     106.815     0.968750         1066        32.00
+     108.095     0.971875         1071        35.56
+     109.055     0.975000         1073        40.00
+     109.759     0.978125         1076        45.71
+     111.551     0.981250         1080        53.33
+     115.839     0.984375         1083        64.00
+     120.255     0.985938         1085        71.11
+     121.855     0.987500         1087        80.00
+     121.919     0.989062         1088        91.43
+     123.583     0.990625         1090       106.67
+     124.991     0.992188         1092       128.00
+     126.207     0.992969         1093       142.22
+     127.423     0.993750         1094       160.00
+     127.423     0.994531         1094       182.86
+     127.551     0.995313         1095       213.33
+     128.895     0.996094         1096       256.00
+     132.095     0.996484         1097       284.44
+     132.095     0.996875         1097       320.00
+     132.095     0.997266         1097       365.71
+     132.991     0.997656         1098       426.67
+     132.991     0.998047         1098       512.00
+     135.039     0.998242         1099       568.89
+     135.039     0.998437         1099       640.00
+     135.039     0.998633         1099       731.43
+     135.039     0.998828         1099       853.33
+     135.039     0.999023         1099      1024.00
+     141.695     0.999121         1100      1137.78
+     141.695     1.000000         1100          inf
+#[Mean    =       82.470, StdDeviation   =       14.636]
+#[Max     =      141.568, Total count    =         1100]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  1200 requests in 2.00m, 290.79KB read
+Requests/sec:     10.00
+Transfer/sec:      2.42KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=30...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 94.473ms, rate sampling interval: 257ms
+  Thread calibration: mean lat.: 103.785ms, rate sampling interval: 301ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    84.17ms   14.20ms 148.61ms   61.33%
+    Req/Sec    14.51      5.72    19.00     83.59%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   79.10ms
+ 75.000%   98.43ms
+ 90.000%  103.42ms
+ 99.000%  112.77ms
+ 99.900%  138.37ms
+ 99.990%  148.74ms
+ 99.999%  148.74ms
+100.000%  148.74ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      55.423     0.000000            1         1.00
+      68.735     0.100000          333         1.11
+      71.807     0.200000          661         1.25
+      74.047     0.300000          998         1.43
+      76.351     0.400000         1326         1.67
+      79.103     0.500000         1655         2.00
+      81.279     0.550000         1817         2.22
+      84.799     0.600000         1980         2.50
+      92.095     0.650000         2147         2.86
+      96.255     0.700000         2311         3.33
+      98.431     0.750000         2475         4.00
+      99.263     0.775000         2564         4.44
+      99.967     0.800000         2641         5.00
+     100.735     0.825000         2725         5.71
+     101.503     0.850000         2806         6.67
+     102.335     0.875000         2892         8.00
+     102.783     0.887500         2930         8.89
+     103.423     0.900000         2972        10.00
+     104.063     0.912500         3015        11.43
+     104.703     0.925000         3055        13.33
+     105.343     0.937500         3100        16.00
+     105.727     0.943750         3117        17.78
+     106.239     0.950000         3135        20.00
+     106.943     0.956250         3156        22.86
+     107.519     0.962500         3178        26.67
+     108.287     0.968750         3197        32.00
+     108.799     0.971875         3208        35.56
+     109.247     0.975000         3218        40.00
+     109.695     0.978125         3228        45.71
+     110.271     0.981250         3241        53.33
+     111.167     0.984375         3251        64.00
+     111.295     0.985938         3254        71.11
+     111.743     0.987500         3259        80.00
+     112.447     0.989062         3264        91.43
+     112.959     0.990625         3270       106.67
+     114.239     0.992188         3275       128.00
+     114.559     0.992969         3277       142.22
+     115.135     0.993750         3280       160.00
+     115.775     0.994531         3282       182.86
+     118.207     0.995313         3285       213.33
+     120.767     0.996094         3288       256.00
+     124.095     0.996484         3289       284.44
+     126.015     0.996875         3290       320.00
+     127.103     0.997266         3291       365.71
+     129.407     0.997656         3293       426.67
+     129.727     0.998047         3294       512.00
+     134.655     0.998242         3295       568.89
+     134.655     0.998437         3295       640.00
+     135.551     0.998633         3296       731.43
+     138.367     0.998828         3297       853.33
+     138.367     0.999023         3297      1024.00
+     141.183     0.999121         3298      1137.78
+     141.183     0.999219         3298      1280.00
+     141.183     0.999316         3298      1462.86
+     142.591     0.999414         3299      1706.67
+     142.591     0.999512         3299      2048.00
+     142.591     0.999561         3299      2275.56
+     142.591     0.999609         3299      2560.00
+     142.591     0.999658         3299      2925.71
+     148.735     0.999707         3300      3413.33
+     148.735     1.000000         3300          inf
+#[Mean    =       84.172, StdDeviation   =       14.198]
+#[Max     =      148.608, Total count    =         3300]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  3600 requests in 2.00m, 0.85MB read
+Requests/sec:     29.99
+Transfer/sec:      7.27KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=50...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 91.139ms, rate sampling interval: 258ms
+  Thread calibration: mean lat.: 94.806ms, rate sampling interval: 263ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    83.51ms   23.64ms 454.91ms   95.31%
+    Req/Sec    24.73      7.30    57.00     77.84%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   77.12ms
+ 75.000%   97.21ms
+ 90.000%  102.59ms
+ 99.000%  116.74ms
+ 99.900%  382.72ms
+ 99.990%  403.45ms
+ 99.999%  455.17ms
+100.000%  455.17ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      50.143     0.000000            1         1.00
+      65.983     0.100000          552         1.11
+      70.143     0.200000         1112         1.25
+      72.575     0.300000         1667         1.43
+      74.623     0.400000         2209         1.67
+      77.119     0.500000         2759         2.00
+      78.911     0.550000         3028         2.22
+      81.919     0.600000         3304         2.50
+      89.279     0.650000         3575         2.86
+      94.655     0.700000         3853         3.33
+      97.215     0.750000         4133         4.00
+      98.175     0.775000         4267         4.44
+      99.007     0.800000         4410         5.00
+      99.839     0.825000         4541         5.71
+     100.607     0.850000         4679         6.67
+     101.631     0.875000         4821         8.00
+     102.079     0.887500         4884         8.89
+     102.591     0.900000         4953        10.00
+     103.103     0.912500         5022        11.43
+     103.679     0.925000         5093        13.33
+     104.383     0.937500         5158        16.00
+     104.703     0.943750         5192        17.78
+     105.087     0.950000         5229        20.00
+     105.471     0.956250         5261        22.86
+     105.919     0.962500         5297        26.67
+     106.559     0.968750         5329        32.00
+     107.071     0.971875         5346        35.56
+     107.647     0.975000         5363        40.00
+     108.351     0.978125         5381        45.71
+     109.247     0.981250         5397        53.33
+     110.527     0.984375         5415        64.00
+     111.231     0.985938         5423        71.11
+     112.447     0.987500         5432        80.00
+     115.647     0.989062         5440        91.43
+     118.783     0.990625         5449       106.67
+     122.623     0.992188         5458       128.00
+     131.839     0.992969         5462       142.22
+     135.039     0.993750         5466       160.00
+     153.599     0.994531         5470       182.86
+     232.959     0.995313         5475       213.33
+     249.343     0.996094         5479       256.00
+     340.479     0.996484         5481       284.44
+     348.159     0.996875         5483       320.00
+     351.231     0.997266         5485       365.71
+     361.471     0.997656         5488       426.67
+     369.407     0.998047         5490       512.00
+     375.551     0.998242         5491       568.89
+     378.111     0.998437         5492       640.00
+     378.367     0.998633         5493       731.43
+     379.647     0.998828         5494       853.33
+     382.719     0.999023         5495      1024.00
+     388.351     0.999121         5496      1137.78
+     388.351     0.999219         5496      1280.00
+     390.143     0.999316         5497      1462.86
+     390.143     0.999414         5497      1706.67
+     403.455     0.999512         5499      2048.00
+     403.455     0.999561         5499      2275.56
+     403.455     0.999609         5499      2560.00
+     403.455     0.999658         5499      2925.71
+     403.455     0.999707         5499      3413.33
+     403.455     0.999756         5499      4096.00
+     403.455     0.999780         5499      4551.11
+     403.455     0.999805         5499      5120.00
+     455.167     0.999829         5500      5851.43
+     455.167     1.000000         5500          inf
+#[Mean    =       83.513, StdDeviation   =       23.636]
+#[Max     =      454.912, Total count    =         5500]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  6000 requests in 2.00m, 1.42MB read
+Requests/sec:     49.99
+Transfer/sec:     12.11KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=80...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 94.828ms, rate sampling interval: 283ms
+  Thread calibration: mean lat.: 102.155ms, rate sampling interval: 398ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    77.35ms   14.40ms 136.70ms   59.12%
+    Req/Sec    39.55      4.38    53.00     80.87%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   72.51ms
+ 75.000%   91.90ms
+ 90.000%   97.86ms
+ 99.000%  105.73ms
+ 99.900%  112.70ms
+ 99.990%  121.09ms
+ 99.999%  136.83ms
+100.000%  136.83ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      45.695     0.000000            1         1.00
+      61.151     0.100000          881         1.11
+      64.319     0.200000         1761         1.25
+      67.007     0.300000         2659         1.43
+      69.567     0.400000         3535         1.67
+      72.511     0.500000         4421         2.00
+      74.367     0.550000         4847         2.22
+      77.567     0.600000         5286         2.50
+      85.375     0.650000         5722         2.86
+      89.471     0.700000         6166         3.33
+      91.903     0.750000         6604         4.00
+      92.863     0.775000         6833         4.44
+      93.823     0.800000         7048         5.00
+      94.911     0.825000         7271         5.71
+      95.743     0.850000         7489         6.67
+      96.767     0.875000         7701         8.00
+      97.343     0.887500         7823         8.89
+      97.855     0.900000         7923        10.00
+      98.367     0.912500         8032        11.43
+      98.943     0.925000         8146        13.33
+      99.647     0.937500         8257        16.00
+     100.031     0.943750         8310        17.78
+     100.543     0.950000         8360        20.00
+     101.055     0.956250         8420        22.86
+     101.567     0.962500         8473        26.67
+     102.271     0.968750         8526        32.00
+     102.655     0.971875         8557        35.56
+     103.039     0.975000         8586        40.00
+     103.359     0.978125         8611        45.71
+     103.807     0.981250         8639        53.33
+     104.383     0.984375         8665        64.00
+     104.767     0.985938         8679        71.11
+     105.023     0.987500         8691        80.00
+     105.471     0.989062         8704        91.43
+     106.047     0.990625         8719       106.67
+     106.815     0.992188         8733       128.00
+     107.199     0.992969         8740       142.22
+     107.711     0.993750         8746       160.00
+     108.223     0.994531         8752       182.86
+     108.607     0.995313         8759       213.33
+     109.119     0.996094         8766       256.00
+     109.439     0.996484         8770       284.44
+     109.759     0.996875         8773       320.00
+     109.951     0.997266         8776       365.71
+     110.527     0.997656         8780       426.67
+     111.103     0.998047         8784       512.00
+     111.167     0.998242         8785       568.89
+     111.871     0.998437         8787       640.00
+     112.191     0.998633         8788       731.43
+     112.511     0.998828         8790       853.33
+     113.791     0.999023         8793      1024.00
+     113.791     0.999121         8793      1137.78
+     114.047     0.999219         8794      1280.00
+     114.047     0.999316         8794      1462.86
+     116.351     0.999414         8795      1706.67
+     118.079     0.999512         8796      2048.00
+     119.167     0.999561         8797      2275.56
+     119.167     0.999609         8797      2560.00
+     119.167     0.999658         8797      2925.71
+     120.703     0.999707         8798      3413.33
+     120.703     0.999756         8798      4096.00
+     121.087     0.999780         8799      4551.11
+     121.087     0.999805         8799      5120.00
+     121.087     0.999829         8799      5851.43
+     121.087     0.999854         8799      6826.67
+     121.087     0.999878         8799      8192.00
+     136.831     0.999890         8800      9102.22
+     136.831     1.000000         8800          inf
+#[Mean    =       77.352, StdDeviation   =       14.402]
+#[Max     =      136.704, Total count    =         8800]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  9600 requests in 2.00m, 2.27MB read
+Requests/sec:     79.98
+Transfer/sec:     19.37KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=100...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 130.558ms, rate sampling interval: 590ms
+  Thread calibration: mean lat.: 141.028ms, rate sampling interval: 690ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    71.03ms   14.60ms 172.80ms   59.97%
+    Req/Sec    49.37      1.57    57.00     88.41%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   64.80ms
+ 75.000%   86.33ms
+ 90.000%   90.88ms
+ 99.000%   99.14ms
+ 99.900%  134.65ms
+ 99.990%  161.66ms
+ 99.999%  172.93ms
+100.000%  172.93ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      44.031     0.000000            1         1.00
+      55.455     0.100000         1106         1.11
+      58.239     0.200000         2203         1.25
+      60.319     0.300000         3309         1.43
+      62.303     0.400000         4410         1.67
+      64.799     0.500000         5501         2.00
+      66.559     0.550000         6051         2.22
+      69.887     0.600000         6605         2.50
+      81.279     0.650000         7150         2.86
+      84.671     0.700000         7711         3.33
+      86.335     0.750000         8252         4.00
+      87.039     0.775000         8541         4.44
+      87.679     0.800000         8815         5.00
+      88.383     0.825000         9077         5.71
+      89.215     0.850000         9365         6.67
+      89.919     0.875000         9626         8.00
+      90.367     0.887500         9762         8.89
+      90.879     0.900000         9906        10.00
+      91.391     0.912500        10042        11.43
+      91.967     0.925000        10181        13.33
+      92.671     0.937500        10322        16.00
+      92.991     0.943750        10383        17.78
+      93.375     0.950000        10451        20.00
+      93.823     0.956250        10521        22.86
+      94.335     0.962500        10588        26.67
+      94.911     0.968750        10664        32.00
+      95.167     0.971875        10692        35.56
+      95.679     0.975000        10726        40.00
+      96.255     0.978125        10758        45.71
+      96.703     0.981250        10793        53.33
+      97.471     0.984375        10828        64.00
+      97.791     0.985938        10846        71.11
+      98.239     0.987500        10863        80.00
+      98.751     0.989062        10879        91.43
+      99.455     0.990625        10898       106.67
+     100.159     0.992188        10913       128.00
+     100.415     0.992969        10921       142.22
+     100.927     0.993750        10930       160.00
+     101.695     0.994531        10939       182.86
+     102.655     0.995313        10947       213.33
+     104.703     0.996094        10957       256.00
+     107.775     0.996484        10960       284.44
+     109.311     0.996875        10964       320.00
+     111.999     0.997266        10968       365.71
+     114.751     0.997656        10973       426.67
+     119.487     0.998047        10977       512.00
+     120.895     0.998242        10979       568.89
+     121.279     0.998437        10981       640.00
+     126.719     0.998633        10983       731.43
+     133.503     0.998828        10986       853.33
+     135.679     0.999023        10988      1024.00
+     137.983     0.999121        10989      1137.78
+     141.695     0.999219        10990      1280.00
+     147.455     0.999316        10991      1462.86
+     147.839     0.999414        10992      1706.67
+     148.607     0.999512        10993      2048.00
+     151.039     0.999561        10994      2275.56
+     151.039     0.999609        10994      2560.00
+     151.807     0.999658        10995      2925.71
+     151.807     0.999707        10995      3413.33
+     157.183     0.999756        10996      4096.00
+     157.183     0.999780        10996      4551.11
+     157.183     0.999805        10996      5120.00
+     161.663     0.999829        10997      5851.43
+     161.663     0.999854        10997      6826.67
+     161.663     0.999878        10997      8192.00
+     161.663     0.999890        10997      9102.22
+     161.663     0.999902        10997     10240.00
+     172.927     0.999915        10998     11702.86
+     172.927     1.000000        10998          inf
+#[Mean    =       71.034, StdDeviation   =       14.600]
+#[Max     =      172.800, Total count    =        10998]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  11999 requests in 2.00m, 2.84MB read
+Requests/sec:     99.97
+Transfer/sec:     24.21KB
+Deleting existing deployments...
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Deleting existing virtual services...
+No resources found
+No resources found
+Creating new deployments...
+deployment.apps/service-a1 created
+deployment.apps/service-a2 created
+deployment.apps/service-a3 created
+deployment.apps/service-a4 created
+deployment.apps/service-a5 created
+deployment.apps/service-b1 created
+deployment.apps/service-b2 created
+deployment.apps/service-b3 created
+deployment.apps/service-c1 created
+deployment.apps/service-c2 created
+deployment.apps/service-c3 created
+deployment.apps/service-c4 created
+deployment.apps/service-d1 created
+deployment.apps/service-d2 created
+deployment.apps/service-d3 created
+deployment.apps/service-e1 created
+deployment.apps/service-e2 created
+deployment.apps/service-e3 created
+deployment.apps/service-e4 created
+deployment.apps/service-e5 created
+Running first wrk2 load test with QPS=150...
+unable to connect to 10.97.31.177:9080 Connection refused
+Running 2m test @ http://10.102.123.170:11000/a?value=1
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 1301.912ms, rate sampling interval: 3256ms
+  Thread calibration: mean lat.: 1136.043ms, rate sampling interval: 2729ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   238.39ms  346.69ms   1.74s    86.13%
+    Req/Sec    75.33      1.61    80.00     89.04%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   91.52ms
+ 75.000%  151.29ms
+ 90.000%  806.91ms
+ 99.000%    1.48s 
+ 99.900%    1.69s 
+ 99.990%    1.73s 
+ 99.999%    1.74s 
+100.000%    1.74s 
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      43.199     0.000000            1         1.00
+      52.703     0.100000         1673         1.11
+      60.511     0.200000         3337         1.25
+      73.791     0.300000         5004         1.43
+      82.879     0.400000         6676         1.67
+      91.519     0.500000         8341         2.00
+      98.303     0.550000         9175         2.22
+     106.047     0.600000        10008         2.50
+     116.351     0.650000        10844         2.86
+     129.983     0.700000        11676         3.33
+     151.295     0.750000        12509         4.00
+     172.287     0.775000        12925         4.44
+     221.183     0.800000        13342         5.00
+     359.679     0.825000        13759         5.71
+     506.879     0.850000        14176         6.67
+     668.671     0.875000        14593         8.00
+     734.207     0.887500        14802         8.89
+     807.423     0.900000        15013        10.00
+     883.199     0.912500        15222        11.43
+     937.983     0.925000        15427        13.33
+    1033.215     0.937500        15635        16.00
+    1081.343     0.943750        15740        17.78
+    1133.567     0.950000        15845        20.00
+    1195.007     0.956250        15951        22.86
+    1247.231     0.962500        16054        26.67
+    1313.791     0.968750        16156        32.00
+    1340.415     0.971875        16212        35.56
+    1366.015     0.975000        16264        40.00
+    1389.567     0.978125        16316        45.71
+    1403.903     0.981250        16366        53.33
+    1420.287     0.984375        16418        64.00
+    1432.575     0.985938        16443        71.11
+    1451.007     0.987500        16470        80.00
+    1470.463     0.989062        16496        91.43
+    1484.799     0.990625        16521       106.67
+    1499.135     0.992188        16548       128.00
+    1510.399     0.992969        16561       142.22
+    1527.807     0.993750        16573       160.00
+    1564.671     0.994531        16586       182.86
+    1622.015     0.995313        16599       213.33
+    1641.471     0.996094        16614       256.00
+    1648.639     0.996484        16619       284.44
+    1654.783     0.996875        16625       320.00
+    1661.951     0.997266        16632       365.71
+    1667.071     0.997656        16638       426.67
+    1671.167     0.998047        16645       512.00
+    1676.287     0.998242        16648       568.89
+    1679.359     0.998437        16651       640.00
+    1683.455     0.998633        16655       731.43
+    1686.527     0.998828        16659       853.33
+    1688.575     0.999023        16662      1024.00
+    1689.599     0.999121        16663      1137.78
+    1691.647     0.999219        16664      1280.00
+    1694.719     0.999316        16666      1462.86
+    1702.911     0.999414        16668      1706.67
+    1704.959     0.999512        16670      2048.00
+    1704.959     0.999561        16670      2275.56
+    1708.031     0.999609        16671      2560.00
+    1709.055     0.999658        16672      2925.71
+    1711.103     0.999707        16673      3413.33
+    1711.103     0.999756        16673      4096.00
+    1718.271     0.999780        16674      4551.11
+    1718.271     0.999805        16674      5120.00
+    1725.439     0.999829        16675      5851.43
+    1725.439     0.999854        16675      6826.67
+    1725.439     0.999878        16675      8192.00
+    1727.487     0.999890        16676      9102.22
+    1727.487     0.999902        16676     10240.00
+    1727.487     0.999915        16676     11702.86
+    1727.487     0.999927        16676     13653.33
+    1727.487     0.999939        16676     16384.00
+    1740.799     0.999945        16677     18204.44
+    1740.799     1.000000        16677          inf
+#[Mean    =      238.393, StdDeviation   =      346.692]
+#[Max     =     1739.776, Total count    =        16677]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  17991 requests in 2.00m, 4.26MB read
+Requests/sec:    149.92
+Transfer/sec:     36.31KB
+deployment.apps "service-a1" deleted
+deployment.apps "service-a2" deleted
+deployment.apps "service-a3" deleted
+deployment.apps "service-a4" deleted
+deployment.apps "service-a5" deleted
+deployment.apps "service-b1" deleted
+deployment.apps "service-b2" deleted
+deployment.apps "service-b3" deleted
+deployment.apps "service-c1" deleted
+deployment.apps "service-c2" deleted
+deployment.apps "service-c3" deleted
+deployment.apps "service-c4" deleted
+deployment.apps "service-d1" deleted
+deployment.apps "service-d2" deleted
+deployment.apps "service-d3" deleted
+deployment.apps "service-e1" deleted
+deployment.apps "service-e2" deleted
+deployment.apps "service-e3" deleted
+deployment.apps "service-e4" deleted
+deployment.apps "service-e5" deleted
+Script execution completed.
+Executing script: /home/dnc/master/paper2024/benchcode/custom/localization.sh
+

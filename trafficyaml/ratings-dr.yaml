@@ -2,13 +2,25 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: ratings-dr
-  namespace: default
+  namespace: bookinfo
 spec:
   host: ratings
   subsets:
   - labels:
-      version: ratings-v1
-    name: ratings-v1
+      version: ratings-2
+    name: ratings-2
+  - labels:
+      version: ratings-5
+    name: ratings-5
+  - labels:
+      version: ratings-4
+    name: ratings-4
+  - labels:
+      version: ratings-1
+    name: ratings-1
+  - labels:
+      version: ratings-3
+    name: ratings-3
   trafficPolicy:
     loadBalancer:
-      simple: LEAST_CONN
+      simple: ROUND_ROBIN

@@ -48,29 +48,32 @@ def get_versions_on_nodes(v1, namespace):
 서비스들 간의 관계를 파악할 때 사용
 '''
 def get_services_relation(prom, namespace):
-    # Istio 텔레메트리 데이터 쿼리 (전체 기간)
+    # Istio telemetry data query (entire period)
     query = f'sum(istio_requests_total{{reporter="source", destination_service_namespace="{namespace}"}}) by (source_app, destination_app)'
     results = prom.custom_query(query)
 
-    # Upstream 및 Downstream 매핑 딕셔너리 초기화
+    # Upstream and Downstream mapping dictionaries initialization
     upstream_map = defaultdict(list)
     downstream_map = defaultdict(list)
 
     for result in results:
         source = result['metric']['source_app']
         destination = result['metric']['destination_app']
-        downstream_map[source].append(destination)
-        upstream_map[destination].append(source)
+        if source != 'unknown' and destination != 'unknown':
+            downstream_map[source].append(destination)
+            upstream_map[destination].append(source)
 
-    # 최종 결과 딕셔너리 초기화
+    # Final result dictionary initialization
     services_dict = defaultdict(lambda: {"upstream": [], "downstream": []})
 
-    # Upstream 및 Downstream 관계 설정
+    # Setting Upstream and Downstream relationships
     for svc, upstreams in upstream_map.items():
-        services_dict[svc]["upstream"].extend(upstreams)
+        if svc != 'unknown':
+            services_dict[svc]["upstream"].extend(upstreams)
 
     for svc, downstreams in downstream_map.items():
-        services_dict[svc]["downstream"].extend(downstreams)
+        if svc != 'unknown':
+            services_dict[svc]["downstream"].extend(downstreams)
 
     return services_dict
 
@@ -162,7 +165,7 @@ def apply_yaml(custom_objects_api, yaml_content):
         else:
             raise
 
-def create_virtual_service_yaml(service_routes, virtualservice_dir):
+def create_virtual_service_yaml(service_routes, virtualservice_dir, namespace):
     grouped_routes = {}
     for route in service_routes:
         source, source_version, destination, destination_version, weight = route
@@ -224,7 +227,7 @@ def create_virtual_service_yaml(service_routes, virtualservice_dir):
                     'kind': 'VirtualService',
                     'metadata': {
                         'name': f'{source}-to-{destination}-vs',
-                        'namespace': 'paper2'
+                        'namespace': namespace
                     },
                     'spec': {
                         'hosts': [destination],
@@ -260,13 +263,13 @@ spec:
   subsets:{subsets}
   trafficPolicy:
     loadBalancer:
-      simple: LEAST_CONN
+      simple: ROUND_ROBIN
 """
 
     return yaml.safe_load(yaml_content)
 
 
-def apply_virtual_service(custom_objects_api, service_routes):
+def apply_virtual_service(custom_objects_api, service_routes, namespace):
     # Delete existing files in the virtualservice and trafficyaml directories
     vspath = "/home/dnc/master/paper2024/trafficyaml"
 
@@ -280,7 +283,7 @@ def apply_virtual_service(custom_objects_api, service_routes):
                     # Ignore the error if the file does not exist
                     pass
 
-    virtual_service_yamls = create_virtual_service_yaml(service_routes, vspath)
+    virtual_service_yamls = create_virtual_service_yaml(service_routes, vspath, namespace)
     for vs_yaml in virtual_service_yamls.values():
         apply_yaml(custom_objects_api, vs_yaml)
         # yaml 저장하기

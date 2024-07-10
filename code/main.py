@@ -10,9 +10,9 @@ from utils.edge_utils import *
 
 
     
-def run_proposed_method(namespace, prometheus_url, method):
-    print("Running proposed method with args:", namespace, prometheus_url, method)  # 디버깅 출력
-    
+def run_proposed_method(namespace, prometheus_url):
+    print("Running proposed method with args:", namespace, prometheus_url)  # 디버깅 출력
+
     # 쿠버네티스와 프로메테우스 연결
     v1, apps_v1, custom_objects_api = load_kube_config()
     prom = connect_to_prometheus(prometheus_url)
@@ -50,10 +50,8 @@ def run_proposed_method(namespace, prometheus_url, method):
     
     service_routes = []
     # above_threshold 경로 중 제거해야할 간선을 공식화하고 ILP로 해결 (수정 요함)
-    if method == "proposed":
-        service_routes, service_versions = traffic_allocation(v1, prom, namespace, dag)
-    elif method == "local":
-        service_routes, service_versions = traffic_allocation_localization(graph_map, v1, prom, namespace, dag)
+
+    service_routes, service_versions = traffic_allocation(v1, prom, namespace, dag)
 
     service_routes = sorted(service_routes, key=lambda x: x[0])
     
@@ -62,20 +60,19 @@ def run_proposed_method(namespace, prometheus_url, method):
         print(service_route)
 
     # 정보를 반영함    
-    #apply_virtual_service(custom_objects_api, service_routes)
-    #apply_destination_rules(namespace, custom_objects_api, service_versions)
+    apply_virtual_service(custom_objects_api, service_routes, namespace)
+    apply_destination_rules(namespace, custom_objects_api, service_versions)
     
     print("Complete")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python main.py <namespace> <prometheus_url> <method>")
+    if len(sys.argv) != 3:
+        print("Usage: python main.py <namespace> <prometheus_url>")
         sys.exit(1)
     
     namespace = sys.argv[1]
     prometheus_url = sys.argv[2]
-    method = sys.argv[3]
-    run_proposed_method(namespace, prometheus_url, method)
+    run_proposed_method(namespace, prometheus_url)
 
 

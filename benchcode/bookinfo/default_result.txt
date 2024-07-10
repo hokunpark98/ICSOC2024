@@ -1,0 +1,493 @@
+Deleting existing deployments...
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/details.yaml": deployments.apps "details-1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/details.yaml": deployments.apps "details-2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/details.yaml": deployments.apps "details-3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/details.yaml": deployments.apps "details-4" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/products.yaml": deployments.apps "productpage-1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/products.yaml": deployments.apps "productpage-2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/products.yaml": deployments.apps "productpage-3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/products.yaml": deployments.apps "productpage-4" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/products.yaml": deployments.apps "productpage-5" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/ratings.yaml": deployments.apps "ratings-1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/ratings.yaml": deployments.apps "ratings-2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/ratings.yaml": deployments.apps "ratings-3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/ratings.yaml": deployments.apps "ratings-4" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/ratings.yaml": deployments.apps "ratings-5" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/reviews.yaml": deployments.apps "reviews-1" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/reviews.yaml": deployments.apps "reviews-2" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/reviews.yaml": deployments.apps "reviews-3" not found
+Error from server (NotFound): error when deleting "/home/dnc/master/bookinfoBench/deployment_placement_x/reviews.yaml": deployments.apps "reviews-4" not found
+Deleting existing virtual services...
+virtualservice.networking.istio.io "productpage-to-reviews-vs" deleted
+virtualservice.networking.istio.io "reviews-to-ratings-vs" deleted
+destinationrule.networking.istio.io "details-dr" deleted
+destinationrule.networking.istio.io "productpage-dr" deleted
+destinationrule.networking.istio.io "ratings-dr" deleted
+destinationrule.networking.istio.io "reviews-dr" deleted
+Creating new deployments...
+deployment.apps/details-1 created
+deployment.apps/details-2 created
+deployment.apps/details-3 created
+deployment.apps/details-4 created
+deployment.apps/productpage-1 created
+deployment.apps/productpage-2 created
+deployment.apps/productpage-3 created
+deployment.apps/productpage-4 created
+deployment.apps/productpage-5 created
+deployment.apps/ratings-1 created
+deployment.apps/ratings-2 created
+deployment.apps/ratings-3 created
+deployment.apps/ratings-4 created
+deployment.apps/ratings-5 created
+deployment.apps/reviews-1 created
+deployment.apps/reviews-2 created
+deployment.apps/reviews-3 created
+deployment.apps/reviews-4 created
+Running first wrk2 load test with QPS=10...
+Running 1m test @ http://10.97.31.177:9080/productpage
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 816.014ms, rate sampling interval: 5210ms
+  Thread calibration: mean lat.: 899.803ms, rate sampling interval: 5763ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    49.63ms   35.09ms 268.03ms   94.40%
+    Req/Sec     4.53      0.50     5.00    100.00%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   33.76ms
+ 75.000%   66.75ms
+ 90.000%   77.06ms
+ 99.000%  170.62ms
+ 99.900%  268.29ms
+ 99.990%  268.29ms
+ 99.999%  268.29ms
+100.000%  268.29ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      16.399     0.000000            1         1.00
+      21.935     0.100000           50         1.11
+      24.255     0.200000          100         1.25
+      26.735     0.300000          150         1.43
+      29.471     0.400000          200         1.67
+      33.759     0.500000          250         2.00
+      40.991     0.550000          275         2.22
+      56.191     0.600000          300         2.50
+      61.151     0.650000          325         2.86
+      64.031     0.700000          350         3.33
+      66.751     0.750000          375         4.00
+      67.903     0.775000          388         4.44
+      69.567     0.800000          400         5.00
+      70.527     0.825000          413         5.71
+      71.807     0.850000          425         6.67
+      74.175     0.875000          439         8.00
+      74.751     0.887500          444         8.89
+      77.055     0.900000          450        10.00
+      78.207     0.912500          457        11.43
+      79.679     0.925000          463        13.33
+      83.135     0.937500          469        16.00
+      84.159     0.943750          472        17.78
+      95.295     0.950000          475        20.00
+     141.951     0.956250          479        22.86
+     146.303     0.962500          482        26.67
+     154.367     0.968750          485        32.00
+     157.951     0.971875          487        35.56
+     160.895     0.975000          488        40.00
+     162.815     0.978125          490        45.71
+     164.095     0.981250          491        53.33
+     166.015     0.984375          493        64.00
+     166.015     0.985938          493        71.11
+     168.575     0.987500          494        80.00
+     170.623     0.989062          495        91.43
+     173.055     0.990625          496       106.67
+     235.775     0.992188          497       128.00
+     235.775     0.992969          497       142.22
+     235.775     0.993750          497       160.00
+     242.303     0.994531          498       182.86
+     242.303     0.995313          498       213.33
+     250.111     0.996094          499       256.00
+     250.111     0.996484          499       284.44
+     250.111     0.996875          499       320.00
+     250.111     0.997266          499       365.71
+     250.111     0.997656          499       426.67
+     268.287     0.998047          500       512.00
+     268.287     1.000000          500          inf
+#[Mean    =       49.632, StdDeviation   =       35.087]
+#[Max     =      268.032, Total count    =          500]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  601 requests in 1.00m, 8.79MB read
+  Socket errors: connect 0, read 0, write 0, timeout 8
+Requests/sec:     10.01
+Transfer/sec:    149.93KB
+Running 2m test @ http://10.97.31.177:9080/productpage
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 68.425ms, rate sampling interval: 277ms
+  Thread calibration: mean lat.: 78.505ms, rate sampling interval: 289ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    47.32ms   32.16ms 213.76ms   87.72%
+    Req/Sec     4.88      7.28    18.00     77.19%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   34.65ms
+ 75.000%   65.66ms
+ 90.000%   82.37ms
+ 99.000%  143.74ms
+ 99.900%  212.74ms
+ 99.990%  213.89ms
+ 99.999%  213.89ms
+100.000%  213.89ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      13.855     0.000000            1         1.00
+      19.647     0.100000          110         1.11
+      22.991     0.200000          220         1.25
+      26.879     0.300000          332         1.43
+      31.199     0.400000          441         1.67
+      34.655     0.500000          550         2.00
+      36.735     0.550000          605         2.22
+      41.407     0.600000          660         2.50
+      46.719     0.650000          716         2.86
+      60.319     0.700000          770         3.33
+      65.791     0.750000          825         4.00
+      67.391     0.775000          853         4.44
+      69.567     0.800000          880         5.00
+      71.679     0.825000          908         5.71
+      73.855     0.850000          935         6.67
+      77.567     0.875000          962         8.00
+      79.679     0.887500          977         8.89
+      82.431     0.900000          991        10.00
+      86.143     0.912500         1003        11.43
+     103.935     0.925000         1017        13.33
+     114.943     0.937500         1031        16.00
+     118.335     0.943750         1038        17.78
+     123.327     0.950000         1045        20.00
+     125.183     0.956250         1051        22.86
+     128.063     0.962500         1058        26.67
+     129.343     0.968750         1065        32.00
+     130.623     0.971875         1069        35.56
+     133.375     0.975000         1072        40.00
+     134.399     0.978125         1076        45.71
+     136.447     0.981250         1079        53.33
+     137.855     0.984375         1082        64.00
+     139.007     0.985938         1084        71.11
+     139.391     0.987500         1086        80.00
+     143.103     0.989062         1087        91.43
+     146.943     0.990625         1089       106.67
+     148.479     0.992188         1091       128.00
+     199.551     0.992969         1092       142.22
+     200.703     0.993750         1093       160.00
+     200.703     0.994531         1093       182.86
+     202.879     0.995313         1094       213.33
+     205.439     0.996094         1095       256.00
+     205.695     0.996484         1096       284.44
+     205.695     0.996875         1096       320.00
+     205.695     0.997266         1096       365.71
+     211.071     0.997656         1097       426.67
+     211.071     0.998047         1097       512.00
+     212.735     0.998242         1098       568.89
+     212.735     0.998437         1098       640.00
+     212.735     0.998633         1098       731.43
+     212.735     0.998828         1098       853.33
+     212.735     0.999023         1098      1024.00
+     213.887     0.999121         1099      1137.78
+     213.887     1.000000         1099          inf
+#[Mean    =       47.322, StdDeviation   =       32.155]
+#[Max     =      213.760, Total count    =         1099]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  1202 requests in 2.00m, 17.58MB read
+Requests/sec:     10.01
+Transfer/sec:    149.97KB
+Running main.py with provided arguments...
+Running proposed method with args: bookinfo http://10.108.230.9:8080
+filtered_path
+filtered_path (['productpage-2', 'details-1'], 9)
+filtered_path (['productpage-2', 'details-4'], 14)
+filtered_path (['productpage-2', 'details-2'], 13)
+filtered_path (['productpage-2', 'details-3'], 16)
+filtered_path (['productpage-2', 'reviews-1', 'ratings-2'], 22)
+filtered_path (['productpage-2', 'reviews-2', 'ratings-2'], 54)
+filtered_path (['productpage-2', 'reviews-3', 'ratings-2'], 46)
+filtered_path (['productpage-2', 'reviews-4', 'ratings-2'], 61)
+filtered_path (['productpage-2', 'reviews-1', 'ratings-5'], 24)
+filtered_path (['productpage-2', 'reviews-2', 'ratings-5'], 56)
+filtered_path (['productpage-2', 'reviews-3', 'ratings-5'], 46)
+filtered_path (['productpage-2', 'reviews-4', 'ratings-5'], 63)
+filtered_path (['productpage-2', 'reviews-1', 'ratings-4'], 24)
+filtered_path (['productpage-2', 'reviews-2', 'ratings-4'], 56)
+filtered_path (['productpage-2', 'reviews-3', 'ratings-4'], 46)
+filtered_path (['productpage-2', 'reviews-4', 'ratings-4'], 63)
+filtered_path (['productpage-2', 'reviews-1', 'ratings-1'], 23)
+filtered_path (['productpage-2', 'reviews-2', 'ratings-1'], 54)
+filtered_path (['productpage-2', 'reviews-3', 'ratings-1'], 48)
+filtered_path (['productpage-2', 'reviews-4', 'ratings-1'], 61)
+filtered_path (['productpage-2', 'reviews-1', 'ratings-3'], 22)
+filtered_path (['productpage-2', 'reviews-2', 'ratings-3'], 55)
+filtered_path (['productpage-2', 'reviews-3', 'ratings-3'], 47)
+filtered_path (['productpage-2', 'reviews-4', 'ratings-3'], 62)
+filtered_path (['productpage-5', 'details-1'], 12)
+filtered_path (['productpage-5', 'details-4'], 18)
+filtered_path (['productpage-5', 'details-2'], 15)
+filtered_path (['productpage-5', 'details-3'], 13)
+filtered_path (['productpage-5', 'reviews-1', 'ratings-2'], 20)
+filtered_path (['productpage-5', 'reviews-2', 'ratings-2'], 41)
+filtered_path (['productpage-5', 'reviews-3', 'ratings-2'], 47)
+filtered_path (['productpage-5', 'reviews-4', 'ratings-2'], 25)
+filtered_path (['productpage-5', 'reviews-1', 'ratings-5'], 22)
+filtered_path (['productpage-5', 'reviews-2', 'ratings-5'], 43)
+filtered_path (['productpage-5', 'reviews-3', 'ratings-5'], 47)
+filtered_path (['productpage-5', 'reviews-4', 'ratings-5'], 27)
+filtered_path (['productpage-5', 'reviews-1', 'ratings-4'], 22)
+filtered_path (['productpage-5', 'reviews-2', 'ratings-4'], 43)
+filtered_path (['productpage-5', 'reviews-3', 'ratings-4'], 47)
+filtered_path (['productpage-5', 'reviews-4', 'ratings-4'], 27)
+filtered_path (['productpage-5', 'reviews-1', 'ratings-1'], 21)
+filtered_path (['productpage-5', 'reviews-2', 'ratings-1'], 41)
+filtered_path (['productpage-5', 'reviews-3', 'ratings-1'], 49)
+filtered_path (['productpage-5', 'reviews-4', 'ratings-1'], 25)
+filtered_path (['productpage-5', 'reviews-1', 'ratings-3'], 20)
+filtered_path (['productpage-5', 'reviews-2', 'ratings-3'], 42)
+filtered_path (['productpage-5', 'reviews-3', 'ratings-3'], 48)
+filtered_path (['productpage-5', 'reviews-4', 'ratings-3'], 26)
+filtered_path (['productpage-1', 'details-1'], 17)
+filtered_path (['productpage-1', 'details-4'], 8)
+filtered_path (['productpage-1', 'details-2'], 8)
+filtered_path (['productpage-1', 'details-3'], 11)
+filtered_path (['productpage-1', 'reviews-1', 'ratings-2'], 15)
+filtered_path (['productpage-1', 'reviews-2', 'ratings-2'], 97)
+filtered_path (['productpage-1', 'reviews-3', 'ratings-2'], 54)
+filtered_path (['productpage-1', 'reviews-4', 'ratings-2'], 206)
+filtered_path (['productpage-1', 'reviews-1', 'ratings-5'], 17)
+filtered_path (['productpage-1', 'reviews-2', 'ratings-5'], 99)
+filtered_path (['productpage-1', 'reviews-3', 'ratings-5'], 54)
+filtered_path (['productpage-1', 'reviews-4', 'ratings-5'], 208)
+filtered_path (['productpage-1', 'reviews-1', 'ratings-4'], 17)
+filtered_path (['productpage-1', 'reviews-2', 'ratings-4'], 99)
+filtered_path (['productpage-1', 'reviews-3', 'ratings-4'], 54)
+filtered_path (['productpage-1', 'reviews-4', 'ratings-4'], 208)
+filtered_path (['productpage-1', 'reviews-1', 'ratings-1'], 16)
+filtered_path (['productpage-1', 'reviews-2', 'ratings-1'], 97)
+filtered_path (['productpage-1', 'reviews-3', 'ratings-1'], 56)
+filtered_path (['productpage-1', 'reviews-4', 'ratings-1'], 206)
+filtered_path (['productpage-1', 'reviews-1', 'ratings-3'], 15)
+filtered_path (['productpage-1', 'reviews-2', 'ratings-3'], 98)
+filtered_path (['productpage-1', 'reviews-3', 'ratings-3'], 55)
+filtered_path (['productpage-1', 'reviews-4', 'ratings-3'], 207)
+filtered_path (['productpage-3', 'details-1'], 16)
+filtered_path (['productpage-3', 'details-4'], 16)
+filtered_path (['productpage-3', 'details-2'], 19)
+filtered_path (['productpage-3', 'details-3'], 12)
+filtered_path (['productpage-3', 'reviews-1', 'ratings-2'], 9)
+filtered_path (['productpage-3', 'reviews-2', 'ratings-2'], 25)
+filtered_path (['productpage-3', 'reviews-4', 'ratings-2'], 30)
+filtered_path (['productpage-3', 'reviews-3', 'ratings-2'], 17)
+filtered_path (['productpage-3', 'reviews-1', 'ratings-5'], 11)
+filtered_path (['productpage-3', 'reviews-2', 'ratings-5'], 27)
+filtered_path (['productpage-3', 'reviews-4', 'ratings-5'], 32)
+filtered_path (['productpage-3', 'reviews-3', 'ratings-5'], 17)
+filtered_path (['productpage-3', 'reviews-1', 'ratings-4'], 11)
+filtered_path (['productpage-3', 'reviews-2', 'ratings-4'], 27)
+filtered_path (['productpage-3', 'reviews-4', 'ratings-4'], 32)
+filtered_path (['productpage-3', 'reviews-3', 'ratings-4'], 17)
+filtered_path (['productpage-3', 'reviews-1', 'ratings-1'], 10)
+filtered_path (['productpage-3', 'reviews-2', 'ratings-1'], 25)
+filtered_path (['productpage-3', 'reviews-4', 'ratings-1'], 30)
+filtered_path (['productpage-3', 'reviews-3', 'ratings-1'], 19)
+filtered_path (['productpage-3', 'reviews-1', 'ratings-3'], 9)
+filtered_path (['productpage-3', 'reviews-2', 'ratings-3'], 26)
+filtered_path (['productpage-3', 'reviews-4', 'ratings-3'], 31)
+filtered_path (['productpage-3', 'reviews-3', 'ratings-3'], 18)
+original graph map
+Node: details-1
+  Upstream: ['productpage-2', 'productpage-5', 'productpage-1', 'productpage-3']
+  Downstream: []
+Node: reviews-4
+  Upstream: ['productpage-5', 'productpage-1', 'productpage-2', 'productpage-3']
+  Downstream: ['ratings-5', 'ratings-3', 'ratings-4', 'ratings-1', 'ratings-2']
+Node: productpage-2
+  Upstream: []
+  Downstream: ['details-4', 'details-1', 'details-2', 'details-3', 'reviews-1', 'reviews-2', 'reviews-3', 'reviews-4']
+Node: reviews-2
+  Upstream: ['productpage-5', 'productpage-1', 'productpage-2', 'productpage-3']
+  Downstream: ['ratings-5', 'ratings-3', 'ratings-1', 'ratings-2', 'ratings-4']
+Node: details-4
+  Upstream: ['productpage-1', 'productpage-2', 'productpage-5', 'productpage-3']
+  Downstream: []
+Node: details-2
+  Upstream: ['productpage-1', 'productpage-2', 'productpage-5', 'productpage-3']
+  Downstream: []
+Node: details-3
+  Upstream: ['productpage-2', 'productpage-5', 'productpage-1', 'productpage-3']
+  Downstream: []
+Node: ratings-2
+  Upstream: ['reviews-1', 'reviews-3', 'reviews-2', 'reviews-4']
+  Downstream: []
+Node: ratings-5
+  Upstream: ['reviews-3', 'reviews-1', 'reviews-2', 'reviews-4']
+  Downstream: []
+Node: ratings-4
+  Upstream: ['reviews-3', 'reviews-1', 'reviews-4', 'reviews-2']
+  Downstream: []
+Node: reviews-3
+  Upstream: ['productpage-5', 'productpage-1', 'productpage-2', 'productpage-3']
+  Downstream: ['ratings-2', 'ratings-4', 'ratings-5', 'ratings-3', 'ratings-1']
+Node: productpage-5
+  Upstream: []
+  Downstream: ['details-4', 'reviews-1', 'details-3', 'details-1', 'details-2', 'reviews-2', 'reviews-3', 'reviews-4']
+Node: ratings-1
+  Upstream: ['reviews-1', 'reviews-2', 'reviews-4', 'reviews-3']
+  Downstream: []
+Node: reviews-1
+  Upstream: ['productpage-2', 'productpage-5', 'productpage-1', 'productpage-3']
+  Downstream: ['ratings-2', 'ratings-3', 'ratings-5', 'ratings-4', 'ratings-1']
+Node: ratings-3
+  Upstream: ['reviews-1', 'reviews-2', 'reviews-3', 'reviews-4']
+  Downstream: []
+Node: productpage-1
+  Upstream: []
+  Downstream: ['details-4', 'details-2', 'details-3', 'reviews-1', 'reviews-2', 'reviews-3', 'reviews-4', 'details-1']
+Node: productpage-3
+  Upstream: []
+  Downstream: ['details-4', 'reviews-1', 'reviews-2', 'reviews-4', 'details-1', 'details-2', 'details-3', 'reviews-3']
+--------------------
+pair ('productpage', 'details')
+Node productpage-1_out has demand -100
+Node details-1_in has demand 125
+Node details-2_in has demand 125
+Node details-3_in has demand 125
+Node details-4_in has demand 125
+Node productpage-2_out has demand -100
+Node productpage-3_out has demand -100
+Node productpage-4_out has demand -100
+Node productpage-5_out has demand -100
+Total demand in the graph: 0
+--------------------
+--------------------
+pair ('reviews', 'ratings')
+Node reviews-1_out has demand -100
+Node ratings-1_in has demand 80
+Node ratings-2_in has demand 80
+Node ratings-3_in has demand 80
+Node ratings-4_in has demand 80
+Node ratings-5_in has demand 80
+Node reviews-2_out has demand -100
+Node reviews-3_out has demand -100
+Node reviews-4_out has demand -100
+Total demand in the graph: 0
+--------------------
+--------------------
+pair ('productpage', 'reviews')
+Node productpage-1_out has demand -100
+Node reviews-1_in has demand 125
+Node reviews-2_in has demand 125
+Node reviews-3_in has demand 125
+Node reviews-4_in has demand 125
+Node productpage-2_out has demand -100
+Node productpage-3_out has demand -100
+Node productpage-4_out has demand -100
+Node productpage-5_out has demand -100
+Total demand in the graph: 0
+--------------------
+[('productpage', 'productpage-1', 'details', 'details-1', 25), ('productpage', 'productpage-1', 'details', 'details-2', 75), ('productpage', 'productpage-1', 'reviews', 'reviews-1', 25), ('productpage', 'productpage-1', 'reviews', 'reviews-2', 75), ('productpage', 'productpage-2', 'details', 'details-2', 50), ('productpage', 'productpage-2', 'details', 'details-3', 50), ('productpage', 'productpage-2', 'reviews', 'reviews-2', 50), ('productpage', 'productpage-2', 'reviews', 'reviews-3', 50), ('productpage', 'productpage-3', 'details', 'details-3', 75), ('productpage', 'productpage-3', 'details', 'details-4', 25), ('productpage', 'productpage-3', 'reviews', 'reviews-3', 75), ('productpage', 'productpage-3', 'reviews', 'reviews-4', 25), ('productpage', 'productpage-4', 'details', 'details-4', 100), ('productpage', 'productpage-4', 'reviews', 'reviews-4', 100), ('productpage', 'productpage-5', 'details', 'details-1', 100), ('productpage', 'productpage-5', 'reviews', 'reviews-1', 100), ('reviews', 'reviews-1', 'ratings', 'ratings-1', 20), ('reviews', 'reviews-1', 'ratings', 'ratings-5', 80), ('reviews', 'reviews-2', 'ratings', 'ratings-1', 20), ('reviews', 'reviews-2', 'ratings', 'ratings-2', 80), ('reviews', 'reviews-3', 'ratings', 'ratings-1', 20), ('reviews', 'reviews-3', 'ratings', 'ratings-3', 80), ('reviews', 'reviews-4', 'ratings', 'ratings-1', 20), ('reviews', 'reviews-4', 'ratings', 'ratings-4', 80)]
+service_routes (sorted)
+('productpage', 'productpage-1', 'details', 'details-1', 25)
+('productpage', 'productpage-1', 'details', 'details-2', 75)
+('productpage', 'productpage-1', 'reviews', 'reviews-1', 25)
+('productpage', 'productpage-1', 'reviews', 'reviews-2', 75)
+('productpage', 'productpage-2', 'details', 'details-2', 50)
+('productpage', 'productpage-2', 'details', 'details-3', 50)
+('productpage', 'productpage-2', 'reviews', 'reviews-2', 50)
+('productpage', 'productpage-2', 'reviews', 'reviews-3', 50)
+('productpage', 'productpage-3', 'details', 'details-3', 75)
+('productpage', 'productpage-3', 'details', 'details-4', 25)
+('productpage', 'productpage-3', 'reviews', 'reviews-3', 75)
+('productpage', 'productpage-3', 'reviews', 'reviews-4', 25)
+('productpage', 'productpage-4', 'details', 'details-4', 100)
+('productpage', 'productpage-4', 'reviews', 'reviews-4', 100)
+('productpage', 'productpage-5', 'details', 'details-1', 100)
+('productpage', 'productpage-5', 'reviews', 'reviews-1', 100)
+('reviews', 'reviews-1', 'ratings', 'ratings-1', 20)
+('reviews', 'reviews-1', 'ratings', 'ratings-5', 80)
+('reviews', 'reviews-2', 'ratings', 'ratings-1', 20)
+('reviews', 'reviews-2', 'ratings', 'ratings-2', 80)
+('reviews', 'reviews-3', 'ratings', 'ratings-1', 20)
+('reviews', 'reviews-3', 'ratings', 'ratings-3', 80)
+('reviews', 'reviews-4', 'ratings', 'ratings-1', 20)
+('reviews', 'reviews-4', 'ratings', 'ratings-4', 80)
+Complete
+Running second wrk2 load test with QPS=10...
+Running 1m test @ http://10.97.31.177:9080/productpage
+  2 threads and 10 connections
+  Thread calibration: mean lat.: 42.000ms, rate sampling interval: 165ms
+  Thread calibration: mean lat.: 33.411ms, rate sampling interval: 125ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    35.63ms   21.63ms 126.46ms   73.00%
+    Req/Sec     4.99     10.77    40.00     85.73%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   24.99ms
+ 75.000%   58.91ms
+ 90.000%   67.58ms
+ 99.000%   95.04ms
+ 99.900%  126.53ms
+ 99.990%  126.53ms
+ 99.999%  126.53ms
+100.000%  126.53ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+      13.903     0.000000            1         1.00
+      16.735     0.100000           50         1.11
+      18.847     0.200000          100         1.25
+      20.575     0.300000          151         1.43
+      22.559     0.400000          200         1.67
+      24.991     0.500000          250         2.00
+      26.639     0.550000          275         2.22
+      28.447     0.600000          301         2.50
+      30.959     0.650000          325         2.86
+      38.399     0.700000          350         3.33
+      58.911     0.750000          375         4.00
+      60.511     0.775000          388         4.44
+      61.247     0.800000          400         5.00
+      62.207     0.825000          413         5.71
+      63.647     0.850000          425         6.67
+      65.471     0.875000          438         8.00
+      66.239     0.887500          444         8.89
+      67.583     0.900000          450        10.00
+      68.415     0.912500          457        11.43
+      70.079     0.925000          463        13.33
+      70.975     0.937500          469        16.00
+      73.215     0.943750          472        17.78
+      75.007     0.950000          475        20.00
+      76.991     0.956250          479        22.86
+      79.615     0.962500          482        26.67
+      80.639     0.968750          485        32.00
+      80.895     0.971875          486        35.56
+      81.471     0.975000          488        40.00
+      82.495     0.978125          490        45.71
+      83.647     0.981250          491        53.33
+      85.951     0.984375          493        64.00
+      85.951     0.985938          493        71.11
+      91.007     0.987500          494        80.00
+      95.039     0.989062          495        91.43
+      96.063     0.990625          496       106.67
+      96.447     0.992188          497       128.00
+      96.447     0.992969          497       142.22
+      96.447     0.993750          497       160.00
+     100.991     0.994531          498       182.86
+     100.991     0.995313          498       213.33
+     112.511     0.996094          499       256.00
+     112.511     0.996484          499       284.44
+     112.511     0.996875          499       320.00
+     112.511     0.997266          499       365.71
+     112.511     0.997656          499       426.67
+     126.527     0.998047          500       512.00
+     126.527     1.000000          500          inf
+#[Mean    =       35.627, StdDeviation   =       21.634]
+#[Max     =      126.464, Total count    =          500]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  602 requests in 1.00m, 8.80MB read
+Requests/sec:     10.03
+Transfer/sec:    150.20KB

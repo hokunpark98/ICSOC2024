@@ -1,0 +1,40 @@
+{
+    "services": [
+      {
+        "service-name": "service-a",
+        "replica": 5,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/customBench/yaml/deployment/service-a.yaml"
+      },
+      {
+        "service-name": "service-b",
+        "replica": 3,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/customBench/yaml/deployment/service-b.yaml"
+      },
+      {
+        "service-name": "service-c",
+        "replica": 4,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/customBench/yaml/deployment/service-c.yaml"
+      },
+      {
+        "service-name": "service-d",
+        "replica": 3,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/customBench/yaml/deployment/service-d.yaml"
+      },
+      {
+        "service-name": "service-e",
+        "replica": 5,
+        "required_CPU": 500,
+        "required_MEM": 500,
+        "path": "/home/dnc/master/customBench/yaml/deployment/service-e.yaml"
+      }
+    ]
+  }
+  

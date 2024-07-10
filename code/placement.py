@@ -133,7 +133,39 @@ def assign_workers_to_groups(groups, nodes, latency_matrix):
         assignments = best_combination
 
     return assignments
-
+'''
+def update_deployment_files(groups):
+    for group in groups:
+        for service in group:
+            worker = service['worker']
+            version = f"{service['service-name']}-{service['id']}"
+            path = service['path']
+            
+            with open(path, 'r') as file:
+                deployment = file.read()
+            
+            # 찾아서 대체하는 부분 수정
+            deployment_lines = deployment.split('\n')
+            for i in range(len(deployment_lines)):
+                print(deployment_lines[i])
+                print(version)
+                if f'name: {version}' in deployment_lines[i]:
+                    print('deployment_lines', deployment_lines)
+                    for j in range(i, len(deployment_lines)):
+                        if 'nodeSelectorTerms' in deployment_lines[j]:
+                            print('deployment_lines', deployment_lines)
+                            for k in range(j, len(deployment_lines)):
+                                if 'values:' in deployment_lines[k]:
+                                    if deployment_lines[k+1].strip().startswith('-'):
+                                        deployment_lines[k+1] = f'                - {worker}'
+                                    break
+                            break
+            
+            updated_deployment = '\n'.join(deployment_lines)
+            
+            with open(path, 'w') as file:
+                file.write(updated_deployment)
+'''
 def update_deployment_files(groups):
     for group in groups:
         for service in group:
@@ -159,6 +191,7 @@ def update_deployment_files(groups):
             
             with open(path, 'w') as file:
                 file.write(updated_deployment)
+
 
 def calculate_total_resources(groups):
     total_resources = []
@@ -219,7 +252,7 @@ def main(file_path):
     for idx, resources in enumerate(total_resources):
         print(f"Group {idx+1}: {resources}")
 
-    apply_deployments(data)
+    #apply_deployments(data)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process the deployment configuration file.')
