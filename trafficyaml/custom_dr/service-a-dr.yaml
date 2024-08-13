@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: service-a-dr
+  namespace: paper2
+spec:
+  host: service-a
+  subsets:
+  - labels:
+      version: service-a5
+    name: service-a5
+  - labels:
+      version: service-a4
+    name: service-a4
+  - labels:
+      version: service-a3
+    name: service-a3
+  - labels:
+      version: service-a2
+    name: service-a2
+  - labels:
+      version: service-a1
+    name: service-a1
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_REQUEST

@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: productpage-vs
+  namespace: bookinfo
+spec:
+  hosts:
+  - productpage
+  http:
+  - route:
+    - destination:
+        host: productpage
+        subset: productpage-1
+      weight: 20
+    - destination:
+        host: productpage
+        subset: productpage-2
+      weight: 20
+    - destination:
+        host: productpage
+        subset: productpage-3
+      weight: 20
+    - destination:
+        host: productpage
+        subset: productpage-4
+      weight: 20
+    - destination:
+        host: productpage
+        subset: productpage-5
+      weight: 20

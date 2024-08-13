@@ -1,0 +1,53 @@
+2thread 4 connections 50씩
+
+upstream 1개 downstream 1개 
+
+1.
+99.000%   21.56ms
+13.91ms
+
+2.
+99.000%   22.53ms
+13.51ms
+
+
+upstream 2개 downstream 1개 
+
+1.
+99.000%   23.58ms
+13.73ms
+
+2.
+99.000%   21.45ms
+13.26ms
+
+upstream 3개 downstream 1개 
+
+1.
+99.000%   21.16ms
+14.95
+
+2.
+99.000%   23.50ms
+13.72
+
+upstream 4개 downstream 1개 
+
+1.
+99.000%   571.39ms
+15.73
+
+2. 
+99.000%   565.25ms
+14.34
+
+upstream 5개 downstream 1개
+1. 
+99.000%    1.36s
+38.34ms
+
+2. 
+99.000%    1.35s
+37.88ms
+
+

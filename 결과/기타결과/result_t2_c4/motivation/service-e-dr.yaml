@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: service-e-dr
+  namespace: paper2
+spec:
+  host: service-e
+  subsets:
+  - labels:
+      version: service-e2
+    name: service-e2
+  - labels:
+      version: service-e3
+    name: service-e3
+  - labels:
+      version: service-e1
+    name: service-e1
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN

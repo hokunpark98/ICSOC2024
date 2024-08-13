@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: productpage-dr
+  namespace: bookinfo
+spec:
+  host: productpage
+  subsets:
+  - labels:
+      version: productpage-4
+    name: productpage-4
+  - labels:
+      version: productpage-2
+    name: productpage-2
+  - labels:
+      version: productpage-3
+    name: productpage-3
+  - labels:
+      version: productpage-1
+    name: productpage-1
+  - labels:
+      version: productpage-5
+    name: productpage-5

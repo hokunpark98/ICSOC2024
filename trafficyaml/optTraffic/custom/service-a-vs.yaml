@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: service-a-vs
+  namespace: paper2
+spec:
+  hosts:
+  - service-a
+  http:
+  - route:
+    - destination:
+        host: service-a
+        subset: service-b1
+      weight: 20
+    - destination:
+        host: service-a
+        subset: service-a2
+      weight: 20
+    - destination:
+        host: service-a
+        subset: service-a3
+      weight: 20
+    - destination:
+        host: service-a
+        subset: service-a4
+      weight: 20
+    - destination:
+        host: service-a
+        subset: service-a5
+      weight: 20

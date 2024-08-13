@@ -1,6 +1,10 @@
-wrk2 -t4 -c20 -d120s -R100 --latency "http://10.102.123.170:11000/a?value=1" -s /home/dnc/master/customBench/code/load_test.lua
+wrk2 -t4 -c20 -d120s -R50 --latency "http://10.102.123.170:11000/a?value=1" -s /home/dnc/master/customBench/code/load_test.lua
 
+python3 /home/dnc/master/paper2024/code/main.py bookinfo http://10.108.230.9:8080 proposed
 python3 /home/dnc/master/paper2024/code/main.py paper2 http://10.108.230.9:8080 proposed
 
-
 wrk2 -t4 -c10 -d30s -R200 http://10.97.31.177:9080/productpage
+
+
+wrk2 -t2 -c10 -d120s -R50 --latency "http://10.99.205.204:11000/a?value=1"
+wrk2 -t2 -c10 -d60s -R10 --latency "http://10.108.105.5:11003/d?value=1" 

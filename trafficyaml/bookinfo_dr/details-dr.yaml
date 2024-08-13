@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: details-dr
+  namespace: bookinfo
+spec:
+  host: details
+  subsets:
+  - labels:
+      version: details-2
+    name: details-2
+  - labels:
+      version: details-1
+    name: details-1
+  - labels:
+      version: details-3
+    name: details-3
+  - labels:
+      version: details-4
+    name: details-4
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_REQUEST

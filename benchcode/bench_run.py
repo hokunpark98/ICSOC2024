@@ -29,17 +29,23 @@ def run_single_sh_file(dir_path, result_dir, sh_file):
 
 
 
-
-bookinfo_sh_files = ["/home/dnc/master/paper2024/benchcode/bookinfo/proposed.sh",
+'''
+bookinfo_sh_files = ["/home/dnc/master/paper2024/benchcode/bookinfo/optTraffic.sh",
+                    "/home/dnc/master/paper2024/benchcode/bookinfo/proposed.sh",
                    "/home/dnc/master/paper2024/benchcode/bookinfo/default.sh",
                    "/home/dnc/master/paper2024/benchcode/bookinfo/localization.sh"]
-custom_sh_files = ["/home/dnc/master/paper2024/benchcode/custom/proposed.sh",
+'''
+
+custom_sh_files = [#"/home/dnc/master/paper2024/benchcode/custom/optTraffic.sh",
+                   "/home/dnc/master/paper2024/benchcode/custom/proposed.sh",
                   "/home/dnc/master/paper2024/benchcode/custom/default.sh",
                   "/home/dnc/master/paper2024/benchcode/custom/localization.sh"]
+
 # Run specified .sh files in bookinfo directory
+'''
 for sh_file in bookinfo_sh_files:
     run_single_sh_file(bookinfo_dir, bookinfo_result_dir, sh_file)
-
+'''
 # Run specified .sh files in custom directory
 for sh_file in custom_sh_files:
     run_single_sh_file(custom_dir, custom_result_dir, sh_file)
